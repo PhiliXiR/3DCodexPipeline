@@ -66,6 +66,18 @@ A Godot script or scene registered as globally available. Autoloads should be ra
 
 Godot's event mechanism for decoupled communication. Signals should carry minimal typed payloads and avoid forcing systems to know each other's internals.
 
+### MMO Camera Mode
+
+A camera integration mode where the camera orbits independently and a future character system rotates the character toward movement direction.
+
+### Action Camera Mode
+
+A camera integration mode where a future character system may rotate the character toward the camera's planar forward direction.
+
+### Mode Output Adapter
+
+A camera component that exposes read-only camera mode and direction data to future character systems without implementing character movement, animation, or physics.
+
 ## Tooling Terms
 
 ### Blender Automation

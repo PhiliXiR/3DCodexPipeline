@@ -27,6 +27,12 @@ Create the MMO Camera System as a reusable runtime system with a modular archite
 
 The camera will follow a generic target and expose integration outputs for future character-facing behavior. It will not implement player movement or a character controller.
 
+Character-facing integration is defined as a read-only contract:
+
+- In MMO mode, future character systems rotate characters toward movement direction while the camera orbits independently.
+- In Action mode, future character systems may rotate characters toward the camera planar forward direction.
+- The camera exposes mode and direction data, but does not apply character transforms, consume movement input, own animation state, or decide movement physics.
+
 Target lock, camera shake, and camera zones are reserved as extension seams only until later approved slices implement them.
 
 The system contract is documented in `docs/runtime_systems/mmo_camera_system_contract.md`.
@@ -49,6 +55,7 @@ Cinematic behavior is useful for some games, but this system is intended for lon
 
 - Camera behavior can be implemented in thin slices.
 - Future controller work can consume camera outputs without being coupled to camera internals.
+- Character movement, turning, animation, networking, and physics remain outside the camera system.
 - The system remains reusable across future projects.
 - More files are required than a one-script prototype, but responsibilities stay easier to test, document, and turn into a skill.
 - Future extension seams must remain documented so they do not become speculative implementation.

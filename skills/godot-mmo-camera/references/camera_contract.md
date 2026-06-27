@@ -11,6 +11,7 @@ Current contract:
 - Smooth zoom.
 - Collision obstruction handling.
 - MMO mode and Action mode integration semantics.
+- Read-only character-facing outputs for future movement systems.
 - Future seams for target lock, camera shake, and camera zones.
 - No player controller.
 - No gameplay scene.

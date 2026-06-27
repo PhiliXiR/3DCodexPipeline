@@ -87,11 +87,42 @@ The camera rotates independently. Future character systems may rotate characters
 
 The camera should expose enough directional data for a future movement system to interpret movement relative to camera orientation.
 
+In MMO mode, the camera does not express a requirement that the character face the camera direction. A future character controller owns movement input, movement velocity, animation state, and final character rotation. The camera only provides camera-relative basis vectors and the configured mode.
+
 ### Action Mode
 
 Future character systems may face characters toward the camera direction.
 
 The camera should expose camera-facing direction without directly rotating the character.
+
+In Action mode, the camera may express that camera-facing movement is desired. A future character controller still owns whether and how to rotate the character, including turn speed, animation blending, root motion, and blocked movement behavior.
+
+## Character-Facing Integration Contract
+
+The camera system provides read-only integration outputs for future character systems. It does not push transforms into a character, consume movement input, or choose animation behavior.
+
+Future movement and character systems may read:
+
+- `camera_mode`: whether the current integration semantics are MMO or Action.
+- `camera_forward`: the camera's full 3D forward direction.
+- `camera_planar_forward`: the camera forward direction projected onto the ground plane.
+- `camera_planar_right`: the camera right direction projected onto the ground plane.
+- `yaw_degrees`: the current desired orbit yaw.
+- `pitch_degrees`: the current desired orbit pitch.
+- `preferred_distance`: the user-selected camera distance before collision resolution.
+- `actual_distance`: the resolved camera distance after smoothing and collision limits.
+- `is_mouse_look_active`: whether right-mouse look is currently active.
+
+Future character systems are responsible for:
+
+- Reading input actions.
+- Converting input into desired movement.
+- Choosing whether movement is camera-relative.
+- Rotating the character toward movement direction in MMO mode.
+- Rotating the character toward camera planar forward in Action mode.
+- Applying turn rates, acceleration, animation, physics, networking, and prediction.
+
+The camera may emit integration signals for mode or distance changes, but those signals should notify consumers only. Signals must not hide character-control side effects.
 
 ## Data Inputs
 
@@ -117,6 +148,7 @@ get_yaw()
 get_pitch()
 get_preferred_distance()
 get_actual_distance()
+is_mouse_look_active()
 get_camera_forward()
 get_camera_planar_forward()
 get_camera_planar_right()

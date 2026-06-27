@@ -19,6 +19,22 @@ Primary references:
 - Collision handler.
 - Mode output adapter.
 
+## Character Integration Boundary
+
+The camera exposes read-only direction and mode data for future character systems. It must not rotate a character, read movement input, choose animations, or own physics movement.
+
+Mode semantics:
+
+- MMO mode: future character systems rotate toward movement direction while the camera orbits independently.
+- Action mode: future character systems may rotate toward camera planar forward.
+
+Current public direction helpers:
+
+- `get_camera_forward()`
+- `get_camera_planar_forward()`
+- `get_camera_planar_right()`
+- `is_mouse_look_active()`
+
 ## Current Slice
 
 The current implementation includes:
