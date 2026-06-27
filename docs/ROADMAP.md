@@ -17,12 +17,14 @@ Deliverables:
 - Initial PRD.
 - Project structure validator.
 - Documentation contract validator.
+- Skill lifecycle documentation and validator.
 
 Exit criteria:
 
 - A new AI agent can understand the project from docs alone.
 - Required folders and docs are validated by automation.
 - The ADR workflow includes a reusable template.
+- Repo-local skills have a required shape and validator.
 - No gameplay, theme, or content direction has been introduced.
 
 ## Phase 2: Asset Pipeline Design
@@ -78,6 +80,7 @@ Deliverables:
 - Testing strategy.
 - ADRs for major system boundaries.
 - First approved runtime system contract.
+- Skill draft requirement for reusable systems.
 
 Exit criteria:
 

@@ -1,5 +1,11 @@
-# Skills
+# Repo-Local Skills
 
-Future AI workflow instructions and reusable agent procedures can live here.
+Repo-local reusable AI workflow instructions live here.
 
-This folder is reserved for project-specific guidance that complements `AGENTS.md`.
+These skills are versioned with the systems and tools they describe. They may reference repository-specific docs, ADRs, scripts, and validators.
+
+See `docs/SKILL_LIFECYCLE.md` for lifecycle and promotion rules.
+
+## Skills
+
+- `godot-asset-pipeline-smoke`: workflow for extending and validating the generated cube Blender-to-Godot smoke pipeline.

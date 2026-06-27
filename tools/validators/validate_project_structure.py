@@ -39,6 +39,7 @@ REQUIRED_FILES = [
     "docs/PRD_AI_FIRST_GAME_FOUNDATION.md",
     "docs/PROJECT_VISION.md",
     "docs/ROADMAP.md",
+    "docs/SKILL_LIFECYCLE.md",
     "docs/adr/0000-template.md",
     "docs/adr/0001-ai-first-godot-foundation-structure.md",
     "docs/adr/0002-first-runtime-system-contract-settings.md",
@@ -48,6 +49,9 @@ REQUIRED_FILES = [
     "game/README.md",
     "game/project.godot",
     "skills/README.md",
+    "skills/TEMPLATE_SKILL.md",
+    "skills/godot-asset-pipeline-smoke/SKILL.md",
+    "skills/godot-asset-pipeline-smoke/references/pipeline_contract.md",
     "tests/README.md",
     "tools/README.md",
     "tools/blender/generate_pipeline_smoke_cube.py",
@@ -57,6 +61,7 @@ REQUIRED_FILES = [
     "tools/validators/validate_documentation_contract.py",
     "tools/validators/validate_pipeline_smoke_cube.py",
     "tools/validators/validate_project_structure.py",
+    "tools/validators/validate_repo_skills.py",
 ]
 
 FORBIDDEN_FOUNDATION_FILES = [

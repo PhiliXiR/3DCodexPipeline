@@ -15,9 +15,10 @@ Run these from the repository root:
 ```powershell
 python tools/validators/validate_project_structure.py
 python tools/validators/validate_documentation_contract.py
+python tools/validators/validate_repo_skills.py
 ```
 
-The structure validator checks required folders, required docs, and the Godot project shell. The documentation validator checks that the core docs remain complete and discoverable.
+The structure validator checks required folders, required docs, and the Godot project shell. The documentation validator checks that the core docs remain complete and discoverable. The repo skill validator checks that repo-local skills have the required shape.
 
 ## Asset Pipeline Smoke Test
 

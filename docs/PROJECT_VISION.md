@@ -67,6 +67,7 @@ This repository may eventually support:
 - Runtime systems such as input, interaction, inventory, dialogue, quests, saves, audio, settings, UI, camera, weather, day/night, and NPC frameworks.
 - Validation and reporting tools.
 - Future vertical slices.
+- Repo-local and shareable skills that preserve repeatable workflows created while building reusable systems.
 
 These should be introduced in stages. During the foundation phase, the goal is structure, documentation, conventions, and validation, not gameplay.
 

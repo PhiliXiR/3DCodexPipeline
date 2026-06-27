@@ -26,6 +26,7 @@ Important files:
 - `ROADMAP.md`: staged foundation roadmap.
 - `GLOSSARY.md`: shared vocabulary.
 - `PRD_AI_FIRST_GAME_FOUNDATION.md`: product and engineering requirements for the foundation.
+- `SKILL_LIFECYCLE.md`: how reusable systems become repo-local and shareable skills.
 
 Important folders:
 
@@ -47,6 +48,14 @@ Automated tests, validation fixtures, and regression checks. This folder is inte
 ### `skills/`
 
 Future project-specific AI workflow instructions. Use this only when a repeatable AI procedure is valuable enough to document separately from `AGENTS.md`.
+
+Repo-local reusable skills use:
+
+```text
+skills/<skill-name>/SKILL.md
+```
+
+See `docs/SKILL_LIFECYCLE.md` and `skills/TEMPLATE_SKILL.md`.
 
 ## `game/`
 
@@ -161,3 +170,11 @@ Testing guidance. Future tests should protect structure, tooling behavior, data 
 Reserved for future project-specific AI procedures.
 
 Do not use this folder for gameplay design notes or theme ideas.
+
+### `skills/TEMPLATE_SKILL.md`
+
+Template for repo-local reusable skills.
+
+### `skills/godot-asset-pipeline-smoke/`
+
+First repo-local skill example. It captures the repeatable workflow for the Blender-to-Godot generated cube pipeline smoke tests.

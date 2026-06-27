@@ -12,6 +12,7 @@ REQUIRED_REFERENCES = {
         "docs/FOLDER_STRUCTURE.md",
         "docs/CODING_STANDARDS.md",
         "docs/GLOSSARY.md",
+        "docs/SKILL_LIFECYCLE.md",
         "docs/adr/",
     ],
     "docs/ARCHITECTURE.md": [
@@ -25,6 +26,7 @@ REQUIRED_REFERENCES = {
     "docs/FOLDER_STRUCTURE.md": [
         "ASSET_PIPELINE.md",
         "PROJECT_VISION.md",
+        "SKILL_LIFECYCLE.md",
         "ARCHITECTURE.md",
         "CODING_STANDARDS.md",
         "ROADMAP.md",
@@ -35,6 +37,13 @@ REQUIRED_REFERENCES = {
         "Phase 1",
         "Current Status",
         "project structure validator",
+        "Skill lifecycle",
+    ],
+    "docs/SKILL_LIFECYCLE.md": [
+        "Definition Of Done For Reusable Systems",
+        "Repo-Local Skills",
+        "Shareable Skills",
+        "promotion",
     ],
     "docs/ASSET_PIPELINE.md": [
         "Stage 1",
@@ -74,6 +83,9 @@ REQUIRED_GLOSSARY_TERMS = [
     "Validation",
     "ADR",
     "PRD",
+    "Repo-Local Skill",
+    "Shareable Skill",
+    "Skill Lifecycle",
 ]
 
 FOUNDATION_BOUNDARY_TERMS = [

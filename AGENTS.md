@@ -59,6 +59,7 @@ After changing foundation structure or documentation, run:
 ```powershell
 python tools/validators/validate_project_structure.py
 python tools/validators/validate_documentation_contract.py
+python tools/validators/validate_repo_skills.py
 ```
 
 If a validator fails, either fix the repository or update the validator and docs together when the project contract has intentionally changed.
@@ -206,6 +207,7 @@ If the change would introduce creative direction or gameplay assumptions, stop a
 - Update `docs/CODING_STANDARDS.md` when code conventions evolve.
 - Update `docs/ROADMAP.md` when project phases or sequencing changes.
 - Update `docs/GLOSSARY.md` when vocabulary changes or new reusable concepts are introduced.
+- Update `docs/SKILL_LIFECYCLE.md` when reusable-system skill expectations change.
 - Add or update an ADR in `docs/adr/` when a decision affects architecture, dependency direction, tooling strategy, data shape, or long-term maintainability.
 
 ## Completion Reports

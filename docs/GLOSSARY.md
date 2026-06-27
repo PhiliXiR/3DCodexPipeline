@@ -98,6 +98,18 @@ The human role responsible for architecture approval, feature approval, and fina
 
 An AI collaborator that may modify code, documentation, tests, tooling, and architecture within the project constraints.
 
+### Repo-Local Skill
+
+A reusable AI workflow stored in this repository under `skills/`. Repo-local skills may reference project-specific docs, ADRs, scripts, validators, and implementation details.
+
+### Shareable Skill
+
+A generalized reusable AI workflow promoted outside this repository after it has been used, refined, and stripped of unnecessary project-specific assumptions.
+
+### Skill Lifecycle
+
+The process for turning reusable system work into reusable AI guidance: contract, implementation, tests, docs, repo skill draft, reuse/refine, and promotion.
+
 ### ADR
 
 An Architecture Decision Record. ADRs document important technical decisions, their context, the chosen approach, alternatives, and consequences.

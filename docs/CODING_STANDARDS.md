@@ -140,6 +140,7 @@ Run the current foundation validators from the repository root:
 ```powershell
 python tools/validators/validate_project_structure.py
 python tools/validators/validate_documentation_contract.py
+python tools/validators/validate_repo_skills.py
 ```
 
 Run the Stage 1 asset pipeline smoke test from the repository root:
