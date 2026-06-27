@@ -8,6 +8,7 @@ from pathlib import Path
 REQUIRED_DIRECTORIES = [
     "docs",
     "docs/adr",
+    "docs/runtime_systems",
     "game",
     "game/assets",
     "game/autoload",
@@ -40,7 +41,10 @@ REQUIRED_FILES = [
     "docs/ROADMAP.md",
     "docs/adr/0000-template.md",
     "docs/adr/0001-ai-first-godot-foundation-structure.md",
+    "docs/adr/0002-first-runtime-system-contract-settings.md",
     "docs/adr/README.md",
+    "docs/runtime_systems/README.md",
+    "docs/runtime_systems/settings_system_contract.md",
     "game/README.md",
     "game/project.godot",
     "skills/README.md",

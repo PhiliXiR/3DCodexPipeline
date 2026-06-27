@@ -50,6 +50,8 @@ Future reusable runtime systems belong under `game/systems/`. Each system should
 
 Potential future systems include input, interaction, inventory, dialogue, quests, save data, audio, UI framework, settings, weather, time of day, NPC behavior, and camera control. These are examples, not approval to implement them now.
 
+Runtime system contracts are documented in `docs/runtime_systems/`. The first approved contract is the Settings System, recorded in ADR 0002. This is a contract only and does not add runtime implementation.
+
 ## Scene Philosophy
 
 Scenes should be small, reusable, and composable.

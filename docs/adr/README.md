@@ -8,6 +8,7 @@ Use ADRs when a decision affects project structure, dependency direction, data s
 
 - [0000: ADR Template](0000-template.md)
 - [0001: Establish AI-First Godot Foundation Structure](0001-ai-first-godot-foundation-structure.md)
+- [0002: Use Settings As The First Runtime System Contract](0002-first-runtime-system-contract-settings.md)
 
 ## When To Write An ADR
 

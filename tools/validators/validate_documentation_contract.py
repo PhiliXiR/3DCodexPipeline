@@ -17,6 +17,7 @@ REQUIRED_REFERENCES = {
     "docs/ARCHITECTURE.md": [
         "docs/GLOSSARY.md",
         "docs/adr/",
+        "docs/runtime_systems/",
         "Dependency Direction",
         "Autoload Policy",
         "Architecture Change Policy",
@@ -46,7 +47,20 @@ REQUIRED_REFERENCES = {
     "docs/adr/README.md": [
         "0000-template.md",
         "0001-ai-first-godot-foundation-structure.md",
+        "0002-first-runtime-system-contract-settings.md",
         "When To Write An ADR",
+    ],
+    "docs/runtime_systems/README.md": [
+        "Settings System Contract",
+        "Contracts are not implementations",
+    ],
+    "docs/runtime_systems/settings_system_contract.md": [
+        "Purpose",
+        "Responsibilities",
+        "Non-Goals",
+        "Public API Shape",
+        "Testing Expectations",
+        "Open Questions",
     ],
 }
 
@@ -54,6 +68,7 @@ REQUIRED_GLOSSARY_TERMS = [
     "AI-First Foundation",
     "Foundation Phase",
     "Runtime System",
+    "Runtime System Contract",
     "Asset Pipeline",
     "Import Report",
     "Validation",

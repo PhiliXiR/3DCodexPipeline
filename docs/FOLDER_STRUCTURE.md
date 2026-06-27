@@ -30,6 +30,7 @@ Important files:
 Important folders:
 
 - `docs/adr/`: Architecture Decision Records.
+- `docs/runtime_systems/`: approved reusable runtime system contracts.
 
 ### `game/`
 

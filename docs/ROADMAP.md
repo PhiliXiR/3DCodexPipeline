@@ -77,6 +77,7 @@ Deliverables:
 - Data contract patterns.
 - Testing strategy.
 - ADRs for major system boundaries.
+- First approved runtime system contract.
 
 Exit criteria:
 

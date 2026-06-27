@@ -24,6 +24,10 @@ Anything tied to a particular future game direction, such as levels, characters,
 
 A reusable Godot system that runs in the game project, such as input, interaction, inventory, dialogue, saving, audio, settings, UI, camera, or NPC behavior.
 
+### Runtime System Contract
+
+A document that defines a reusable runtime system before implementation. It should describe responsibilities, non-goals, API shape, integration points, testing expectations, and open questions.
+
 ### Editor Tool
 
 A Godot editor plugin or workflow helper used to make development faster and more reliable. Examples include scatter tools, scene validators, import helpers, road tools, and navigation helpers.
