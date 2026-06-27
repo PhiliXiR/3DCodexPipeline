@@ -1,62 +1,92 @@
 # Folder Structure
 
-This document explains the major folders in the repository. Keep it updated whenever the structure changes.
+This document explains the major folders in the repository. Keep it updated whenever folders are added, removed, renamed, or repurposed.
 
 ## Root
 
 ### `AGENTS.md`
 
-Instructions for future AI agents working in this repository.
+AI collaboration guide. Future agents should read this before making changes.
+
+### `.gitignore`
+
+Git ignore rules for Godot-generated files, local editor noise, logs, reports, and Blender backup files.
 
 ### `docs/`
 
-Project documentation covering vision, architecture, coding standards, roadmap, and folder responsibilities.
+Project documentation. This is part of the architecture, not auxiliary material.
+
+Important files:
+
+- `PROJECT_VISION.md`: purpose, boundaries, and collaboration model.
+- `ARCHITECTURE.md`: system boundaries, dependency direction, and architectural policies.
+- `FOLDER_STRUCTURE.md`: repository layout and folder responsibilities.
+- `CODING_STANDARDS.md`: GDScript, scene, naming, testing, and documentation conventions.
+- `ROADMAP.md`: staged foundation roadmap.
+- `GLOSSARY.md`: shared vocabulary.
+- `PRD_AI_FIRST_GAME_FOUNDATION.md`: product and engineering requirements for the foundation.
+
+Important folders:
+
+- `docs/adr/`: Architecture Decision Records.
 
 ### `game/`
 
-The Godot project root. It contains runtime code, scenes, data, UI, assets, autoloads, and project configuration.
+Godot project root. Runtime project files live here. Keep this folder free of external automation scripts unless they are part of the Godot project itself.
 
 ### `tools/`
 
-Automation and development tooling outside the runtime game project.
+Development automation outside runtime gameplay. Blender scripts, Godot helpers, editor tools, importers, and validators belong here.
 
 ### `tests/`
 
-Automated tests, validation fixtures, and future regression checks.
+Automated tests, validation fixtures, and regression checks. This folder is intentionally separate from runtime systems so testing infrastructure does not become game content.
 
 ### `skills/`
 
-Future AI workflow guidance, specialized agent instructions, or reusable task procedures.
+Future project-specific AI workflow instructions. Use this only when a repeatable AI procedure is valuable enough to document separately from `AGENTS.md`.
 
 ## `game/`
 
+### `game/project.godot`
+
+Minimal Godot 4 project shell for the foundation.
+
+### `game/README.md`
+
+Local explanation of the Godot project root.
+
 ### `game/assets/`
 
-Imported or processed art assets used by Godot. Synty-style assets and GLB outputs will eventually land here after the import pipeline processes them.
+Imported or processed assets used by Godot. Future GLB outputs and processed Synty-style assets may land here after the asset pipeline exists.
+
+Do not place raw source asset dumps here without an import convention.
 
 ### `game/characters/`
 
-Reusable character-related scenes and scripts. This folder remains empty until generic character foundations are approved.
+Reusable character-related scenes and scripts. This folder is not approval to create a player, NPC, enemy, or themed character. It is reserved for future generic character foundations.
 
 ### `game/world/`
 
-Reusable world-building scenes, environment modules, navigation helpers, and spatial composition tools. This must remain genre-neutral.
+Reusable world-building scenes, spatial modules, navigation helpers, and environment composition tools. Keep this genre-neutral.
 
 ### `game/ui/`
 
-Reusable UI scenes, controls, themes, and presentation helpers.
+Reusable UI scenes, controls, themes, and presentation helpers. Do not add game-specific HUDs or menus during the foundation phase.
 
 ### `game/systems/`
 
-Reusable runtime systems such as input, interaction, inventory, dialogue, quests, saves, audio, settings, cameras, and other framework-level features.
+Reusable runtime systems. Future examples may include input, interaction, inventory, dialogue, quest framework, save system, audio, settings, camera, weather, day/night, or NPC framework.
+
+Systems should be added only when approved and should remain data-driven and genre-neutral.
 
 ### `game/data/`
 
-Data resources and configuration files used by reusable systems.
+Reusable data definitions and configuration used by systems. Prefer documented schemas and validation.
 
 ### `game/scenes/`
 
-Shared scenes, test scenes, and future project entry scenes. No gameplay scenes should be added during the foundation phase.
+Shared scenes, test scenes, and future entry scenes. During the foundation phase, avoid gameplay scenes and level content.
 
 ### `game/autoload/`
 
@@ -64,22 +94,53 @@ Scripts intended for Godot autoload registration. Use sparingly and only for sta
 
 ## `tools/`
 
+### `tools/README.md`
+
+Overview of tooling responsibilities.
+
 ### `tools/blender/`
 
-Blender automation scripts for future Synty asset processing, transform normalization, object naming, collision generation, GLB export, and import reports.
+Blender automation scripts for future asset processing:
+
+- Importing source asset packs.
+- Normalizing transforms.
+- Renaming objects.
+- Generating collision meshes.
+- Exporting GLB files.
+- Generating processing reports.
 
 ### `tools/godot/`
 
-Godot command-line helper scripts and reusable project automation.
+Godot command-line helper scripts and project automation.
+
+Examples may eventually include import refresh commands, export checks, project metadata inspection, or headless validation.
 
 ### `tools/editor/`
 
-Godot editor plugins and editor-only workflows such as scatter tools, road generation, forest generation, interior population, and navigation helpers.
+Godot editor plugins and editor-only workflows.
+
+Future examples may include scatter tools, road generation, forest generation, interior population, navigation helpers, scene validators, and import helpers.
 
 ### `tools/importers/`
 
-Asset import pipeline code that coordinates source assets, Blender processing, Godot import settings, and generated reports.
+Asset import pipeline coordination. Importers should connect source assets, Blender processing, Godot import settings, output placement, and reports.
 
 ### `tools/validators/`
 
-Validation scripts for assets, scenes, data files, import conventions, and project structure.
+Validation scripts for repository structure, documentation, assets, scenes, data files, naming conventions, and import outputs.
+
+The next recommended engineering task is to add a project structure validator here.
+
+## `tests/`
+
+### `tests/README.md`
+
+Testing guidance. Future tests should protect structure, tooling behavior, data schemas, scene contracts, and reusable system behavior.
+
+## `skills/`
+
+### `skills/README.md`
+
+Reserved for future project-specific AI procedures.
+
+Do not use this folder for gameplay design notes or theme ideas.

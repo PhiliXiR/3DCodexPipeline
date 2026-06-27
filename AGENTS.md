@@ -1,97 +1,208 @@
-# AI Agent Guide
+# AI Collaboration Guide
 
-This repository is an AI-first foundation for building future 3D games in Godot 4. It is not a game, and agents must not choose a genre, story, visual theme, or gameplay direction without explicit human approval.
+This repository is an AI-first foundation for future 3D games built with Godot 4. It is not a game yet. Agents must preserve the foundation as reusable infrastructure and must not choose a genre, theme, story, visual direction, gameplay loop, or content direction without explicit human approval.
 
-The highest priority is to keep the project reusable, maintainable, simple, automatable, and easy for future AI agents to understand.
+The highest priority is to make future development easier for both humans and AI agents through clear architecture, small modules, typed code, automation, validation, and durable documentation.
+
+## Operating Model
+
+The human user is the Creative Director and Technical Lead.
+
+The human decides:
+
+- Creative direction.
+- Gameplay direction.
+- Feel and style.
+- Major architecture approvals.
+- Feature approval.
+- When a generic foundation system becomes project-specific content.
+
+AI agents are engineering collaborators.
+
+Agents may:
+
+- Improve architecture and documentation.
+- Add reusable infrastructure after the scope is clear.
+- Write typed GDScript.
+- Add tests, validators, importers, and editor tooling.
+- Refactor toward clearer boundaries.
+- Propose implementation options and tradeoffs.
+
+Agents must not:
+
+- Invent lore, factions, characters, quests, items, levels, worlds, or themes.
+- Create gameplay before it is approved.
+- Add placeholder game mechanics to "prove" the structure.
+- Hardcode assumptions about genre, camera style, player form, combat, inventory, dialogue, world scale, or progression.
+- Hide important behavior in undocumented editor state.
+- Make broad architecture changes without explaining why.
+
+## Required Reading Before Work
+
+Before changing architecture, tools, systems, or docs, read:
+
+- `docs/PROJECT_VISION.md`
+- `docs/ARCHITECTURE.md`
+- `docs/FOLDER_STRUCTURE.md`
+- `docs/CODING_STANDARDS.md`
+- `docs/GLOSSARY.md`
+- Relevant ADRs in `docs/adr/`
+
+If a term is unclear, prefer updating `docs/GLOSSARY.md` over inventing a competing name.
 
 ## Project Philosophy
 
 - Build a professional game development foundation, not a single-game prototype.
 - Keep systems generic until a specific future game is approved.
-- Prefer small, composable modules over global managers.
-- Use data-driven configuration wherever possible.
-- Automate repetitive work through editor tools, importers, validators, and scripts.
-- Document architectural intent near the systems that depend on it.
+- Prefer small, composable modules over giant managers.
+- Prefer data-driven configuration over hardcoded content.
+- Automate repetitive workflows.
+- Validate assumptions with tools and tests.
+- Document architectural intent near the decisions that depend on it.
+- Keep the repository understandable to a new AI agent with no prior conversation context.
 
-## Agent Responsibilities
+## Current Phase Rules
 
-AI agents may:
+The repository is in the foundation phase.
 
-- Improve architecture and documentation.
-- Create reusable Godot systems after approval.
-- Add typed GDScript, tests, validators, and editor tooling.
-- Create Blender and Godot automation scripts.
-- Refactor toward clearer boundaries and stronger reuse.
+Allowed:
 
-AI agents must not:
+- Documentation.
+- Project organization.
+- Validators.
+- Tool skeletons.
+- Godot project setup.
+- Generic architecture decisions.
+- Test infrastructure.
 
-- Invent lore, factions, characters, quests, worlds, or themes.
-- Build gameplay before the approved foundation phase calls for it.
-- Hardcode genre-specific assumptions.
-- Add giant singleton managers as a first resort.
-- Hide important behavior in undocumented editor state.
-- Make broad architectural changes without explaining the reason and tradeoffs.
+Not allowed yet:
+
+- Player controllers.
+- Enemies or NPCs.
+- Levels or maps.
+- Items, quests, dialogue content, abilities, combat, or progression.
+- Theme-specific assets.
+- Game-specific UI.
+- Vertical slice content.
+
+## Architecture Principles
+
+### Modularity
+
+Systems should be independently understandable. Prefer narrow APIs, explicit dependencies, and small files.
+
+### Composition
+
+Prefer composition through nodes, resources, signals, and small scripts. Use inheritance only when the relationship is stable and clear.
+
+### Data-Driven Design
+
+Systems should accept data definitions instead of embedding content. Use Godot `Resource` classes when editor integration matters, and external data files when bulk editing or pipeline tools benefit from them.
+
+### Dependency Direction
+
+Generic foundation code must not depend on game-specific content. Dependencies should generally flow from specific features toward generic systems, not the reverse.
+
+### Automation First
+
+If a workflow will be repeated, prefer a tool, validator, importer, or report over manual instructions.
+
+### Documentation As Infrastructure
+
+Docs are part of the architecture. If behavior or boundaries change, update the docs in the same change.
 
 ## Coding Rules
 
-- Use Godot 4.x and typed GDScript.
-- Prefer explicit types for variables, function parameters, and return values.
-- Keep scripts small, usually 100-300 lines.
+- Use Godot 4.x.
+- Use typed GDScript.
+- Prefer explicit parameter and return types.
+- Keep scripts focused, usually 100-300 lines.
 - One script should have one clear responsibility.
-- Prefer composition through nodes, resources, and signals.
-- Keep dependencies directional and easy to trace.
-- Use comments only to explain intent, constraints, or non-obvious behavior.
-- Avoid clever code when clear code would do.
+- Prefer clear code over clever code.
+- Keep runtime scripts separate from editor and pipeline scripts.
+- Use comments to explain intent, constraints, and non-obvious Godot lifecycle behavior.
+- Avoid comments that merely restate the code.
 
 ## Naming Conventions
 
 - Files and folders: `snake_case`.
 - GDScript classes: `PascalCase`.
 - Variables and functions: `snake_case`.
-- Signals: past-tense or event-style `snake_case`, such as `interaction_started`.
+- Signals: event-style `snake_case`, such as `interaction_started`.
 - Constants: `UPPER_SNAKE_CASE`.
-- Scenes: descriptive `PascalCase.tscn` when they represent reusable scene classes.
-- Resources: descriptive names that include the resource role when useful.
+- Scene files: `PascalCase.tscn` for reusable scene classes.
+- Resource files: descriptive `snake_case` names.
+- Tool scripts: name by action and target, such as `validate_project_structure`.
+
+Names should describe generic responsibilities. Avoid names that imply genre, lore, story, player fantasy, or final game direction.
 
 ## Preferred Patterns
 
 - Small scene components with focused scripts.
 - Resources for reusable configuration and data definitions.
-- Signals for decoupled communication between peers.
-- Autoloads only for truly global services with stable contracts.
-- Editor plugins for repeatable workflows.
-- Validators for asset, scene, and data quality checks.
+- Signals for decoupled communication between peer systems.
+- Explicit setup methods or exported references for required dependencies.
+- Autoloads only for stable global services with small APIs.
+- Editor plugins for repeatable editor workflows.
+- Validators for project, asset, scene, and data quality.
 - Import reports for automated asset pipeline work.
+- ADRs for durable architecture decisions.
 
 ## Things To Avoid
 
 - Theme-specific names in reusable systems.
-- Direct references from low-level systems to high-level game features.
-- Hidden dependencies on scene tree paths.
-- Large inheritance hierarchies when composition is enough.
+- Direct references from low-level foundation code to high-level game features.
+- Hidden dependencies on brittle scene tree paths.
+- Large inheritance hierarchies.
+- Broad singleton managers.
 - One-off scripts that duplicate reusable tool behavior.
 - Unvalidated asset import conventions.
-- Silent failures in tools or import scripts.
+- Silent failures in tools, importers, or validators.
+- Adding systems "just in case" without a near-term engineering need.
+
+## Change Workflow
+
+When making a change:
+
+1. Read the relevant docs and ADRs.
+2. Identify whether the work is foundation, tooling, runtime system, or game-specific content.
+3. Keep the change as small as practical.
+4. Update documentation when boundaries, vocabulary, or workflow expectations change.
+5. Add tests or validators when behavior can regress.
+6. Explain what changed, why, alternatives considered, and tradeoffs.
 
 ## Proposing Changes
 
-When proposing or making changes:
+When proposing a change, include:
 
-1. State the engineering goal.
-2. Explain the files or systems affected.
-3. Describe alternatives considered.
-4. Call out tradeoffs and future migration concerns.
-5. Update documentation when architectural intent changes.
-6. Add or update tests and validators when behavior can regress.
+- Engineering goal.
+- Scope.
+- Files or modules affected.
+- Alternatives considered.
+- Tradeoffs.
+- Testing or validation approach.
+- Documentation updates needed.
+
+If the change would introduce creative direction or gameplay assumptions, stop and ask for approval.
 
 ## Documentation Expectations
 
+- Update `docs/PROJECT_VISION.md` when project purpose or collaboration model changes.
 - Update `docs/ARCHITECTURE.md` when module boundaries or dependency direction changes.
 - Update `docs/FOLDER_STRUCTURE.md` when folders are added, removed, or repurposed.
 - Update `docs/CODING_STANDARDS.md` when code conventions evolve.
-- Update `docs/ROADMAP.md` when project phases change.
-- Keep docs generic unless the human creative director approves a concrete game direction.
+- Update `docs/ROADMAP.md` when project phases or sequencing changes.
+- Update `docs/GLOSSARY.md` when vocabulary changes or new reusable concepts are introduced.
+- Add or update an ADR in `docs/adr/` when a decision affects architecture, dependency direction, tooling strategy, data shape, or long-term maintainability.
 
-## Current Constraint
+## Completion Reports
 
-This repository is in the foundation phase. Do not create players, levels, enemies, items, quests, or game-specific assets.
+When finishing work, report:
+
+- What changed.
+- Why it changed.
+- What was intentionally not changed.
+- How it was verified.
+- Recommended next engineering task.
+
+Keep reports concise, specific, and free of invented creative direction.
