@@ -93,6 +93,10 @@ Reusable runtime systems. Future examples may include input, interaction, invent
 
 Systems should be added only when approved and should remain data-driven and genre-neutral.
 
+Current approved system areas:
+
+- `game/systems/camera/`: reusable MMO-style third-person camera foundation.
+
 ### `game/data/`
 
 Reusable data definitions and configuration used by systems. Prefer documented schemas and validation.

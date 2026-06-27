@@ -60,8 +60,17 @@ REQUIRED_REFERENCES = {
         "When To Write An ADR",
     ],
     "docs/runtime_systems/README.md": [
+        "MMO Camera System Contract",
         "Settings System Contract",
         "Contracts are not implementations",
+    ],
+    "docs/runtime_systems/mmo_camera_system_contract.md": [
+        "Purpose",
+        "Responsibilities",
+        "Non-Goals",
+        "Camera Settings Resource",
+        "Future Extension Seams",
+        "Skill Requirement",
     ],
     "docs/runtime_systems/settings_system_contract.md": [
         "Purpose",
