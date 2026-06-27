@@ -16,3 +16,6 @@ reports/
 # Blender backups
 *.blend1
 *.blend2
+
+# Generated asset pipeline outputs
+game/assets/generated/

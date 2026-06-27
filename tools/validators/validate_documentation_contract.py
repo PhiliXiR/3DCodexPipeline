@@ -22,6 +22,7 @@ REQUIRED_REFERENCES = {
         "Architecture Change Policy",
     ],
     "docs/FOLDER_STRUCTURE.md": [
+        "ASSET_PIPELINE.md",
         "PROJECT_VISION.md",
         "ARCHITECTURE.md",
         "CODING_STANDARDS.md",
@@ -33,6 +34,13 @@ REQUIRED_REFERENCES = {
         "Phase 1",
         "Current Status",
         "project structure validator",
+    ],
+    "docs/ASSET_PIPELINE.md": [
+        "Stage 1",
+        "Blender is a required dependency",
+        "game/assets/generated/pipeline_smoke/",
+        "schema_version",
+        "Stage 2",
     ],
     "docs/adr/README.md": [
         "0000-template.md",
@@ -46,6 +54,7 @@ REQUIRED_GLOSSARY_TERMS = [
     "Foundation Phase",
     "Runtime System",
     "Asset Pipeline",
+    "Import Report",
     "Validation",
     "ADR",
     "PRD",

@@ -31,6 +31,7 @@ REQUIRED_FILES = [
     "AGENTS.md",
     ".gitignore",
     "docs/ARCHITECTURE.md",
+    "docs/ASSET_PIPELINE.md",
     "docs/CODING_STANDARDS.md",
     "docs/FOLDER_STRUCTURE.md",
     "docs/GLOSSARY.md",
@@ -45,7 +46,10 @@ REQUIRED_FILES = [
     "skills/README.md",
     "tests/README.md",
     "tools/README.md",
+    "tools/blender/generate_pipeline_smoke_cube.py",
+    "tools/importers/run_pipeline_smoke_test.py",
     "tools/validators/validate_documentation_contract.py",
+    "tools/validators/validate_pipeline_smoke_cube.py",
     "tools/validators/validate_project_structure.py",
 ]
 

@@ -35,6 +35,7 @@ Deliverables:
 - Processed asset conventions.
 - Blender automation plan.
 - GLB export expectations.
+- Stage 1 script-generated cube smoke test.
 - Collision generation strategy.
 - Import report format.
 - Asset validation rules.

@@ -18,3 +18,21 @@ python tools/validators/validate_documentation_contract.py
 ```
 
 The structure validator checks required folders, required docs, and the Godot project shell. The documentation validator checks that the core docs remain complete and discoverable.
+
+## Asset Pipeline Smoke Test
+
+Blender is required for the Stage 1 asset pipeline smoke test.
+
+Run from the repository root:
+
+```powershell
+python tools/importers/run_pipeline_smoke_test.py
+```
+
+If Blender is not on `PATH`, pass:
+
+```powershell
+python tools/importers/run_pipeline_smoke_test.py --blender-path "C:\Path\To\blender.exe"
+```
+
+Generated outputs are written to `game/assets/generated/pipeline_smoke/` and ignored by Git.

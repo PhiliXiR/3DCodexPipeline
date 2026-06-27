@@ -99,6 +99,8 @@ Tools should be repeatable, safe to run more than once, and clear about what the
 
 The future asset pipeline should support source assets moving through processing, validation, import, and reporting.
 
+The first implemented pipeline test is documented in `docs/ASSET_PIPELINE.md`. It generates a neutral cube in Blender, exports GLB, writes an import report, and validates those outputs before any Godot import step is introduced.
+
 Expected future responsibilities:
 
 - Normalize transforms.

@@ -20,6 +20,7 @@ Important files:
 
 - `PROJECT_VISION.md`: purpose, boundaries, and collaboration model.
 - `ARCHITECTURE.md`: system boundaries, dependency direction, and architectural policies.
+- `ASSET_PIPELINE.md`: source, generated output, import report, and pipeline smoke test conventions.
 - `FOLDER_STRUCTURE.md`: repository layout and folder responsibilities.
 - `CODING_STANDARDS.md`: GDScript, scene, naming, testing, and documentation conventions.
 - `ROADMAP.md`: staged foundation roadmap.
@@ -61,6 +62,8 @@ Local explanation of the Godot project root.
 Imported or processed assets used by Godot. Future GLB outputs and processed Synty-style assets may land here after the asset pipeline exists.
 
 Do not place raw source asset dumps here without an import convention.
+
+Generated pipeline outputs may be written under `game/assets/generated/`. These outputs are ignored by Git and should be recreated by pipeline scripts.
 
 ### `game/characters/`
 
@@ -109,6 +112,10 @@ Blender automation scripts for future asset processing:
 - Exporting GLB files.
 - Generating processing reports.
 
+Current scripts:
+
+- `generate_pipeline_smoke_cube.py`: generates the Stage 1 neutral cube GLB and import report.
+
 ### `tools/godot/`
 
 Godot command-line helper scripts and project automation.
@@ -125,6 +132,10 @@ Future examples may include scatter tools, road generation, forest generation, i
 
 Asset import pipeline coordination. Importers should connect source assets, Blender processing, Godot import settings, output placement, and reports.
 
+Current scripts:
+
+- `run_pipeline_smoke_test.py`: runs the Stage 1 Blender cube smoke test and validator.
+
 ### `tools/validators/`
 
 Validation scripts for repository structure, documentation, assets, scenes, data files, naming conventions, and import outputs.
@@ -133,6 +144,7 @@ Current validators:
 
 - `validate_project_structure.py`: checks the foundation folder and file contract.
 - `validate_documentation_contract.py`: checks required documentation references and vocabulary.
+- `validate_pipeline_smoke_cube.py`: checks the generated Stage 1 cube GLB and report contract.
 
 ## `tests/`
 

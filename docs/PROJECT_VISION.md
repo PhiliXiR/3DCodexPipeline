@@ -61,6 +61,7 @@ AI agents are careful engineering collaborators. They may recommend architecture
 This repository may eventually support:
 
 - Blender-assisted asset processing.
+- A script-generated cube pipeline smoke test that proves asset output contracts without introducing game content.
 - Synty-style asset import workflows.
 - Godot editor plugins.
 - Runtime systems such as input, interaction, inventory, dialogue, quests, saves, audio, settings, UI, camera, weather, day/night, and NPC frameworks.

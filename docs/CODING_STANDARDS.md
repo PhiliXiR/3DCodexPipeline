@@ -142,6 +142,14 @@ python tools/validators/validate_project_structure.py
 python tools/validators/validate_documentation_contract.py
 ```
 
+Run the Stage 1 asset pipeline smoke test from the repository root:
+
+```powershell
+python tools/importers/run_pipeline_smoke_test.py
+```
+
+If Blender is not on `PATH`, pass `--blender-path`.
+
 Future testing targets:
 
 - Asset import validation.
