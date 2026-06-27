@@ -16,6 +16,7 @@ var _current_pitch_degrees: float = 0.0
 var _preferred_distance: float = 0.0
 var _actual_distance: float = 0.0
 var _is_initialized: bool = false
+var _is_mouse_look_active: bool = false
 
 
 func _ready() -> void:
@@ -36,6 +37,15 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	update_camera(delta)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		_handle_mouse_button(event as InputEventMouseButton)
+		return
+
+	if event is InputEventMouseMotion and _is_mouse_look_active:
+		_handle_mouse_motion(event as InputEventMouseMotion)
 
 
 func set_target(target: Node3D) -> void:
@@ -90,6 +100,10 @@ func get_actual_distance() -> float:
 	return _actual_distance
 
 
+func is_mouse_look_active() -> bool:
+	return _is_mouse_look_active
+
+
 func get_camera_forward() -> Vector3:
 	if _camera == null:
 		return -global_transform.basis.z
@@ -109,6 +123,19 @@ func get_camera_planar_right() -> Vector3:
 
 func _can_update() -> bool:
 	return _is_initialized and settings != null and _target != null and _camera != null
+
+
+func _handle_mouse_button(event: InputEventMouseButton) -> void:
+	if event.button_index != MOUSE_BUTTON_RIGHT:
+		return
+
+	_is_mouse_look_active = event.pressed
+
+
+func _handle_mouse_motion(event: InputEventMouseMotion) -> void:
+	var yaw_delta := -event.relative.x * settings.rotation_sensitivity
+	var pitch_delta := -event.relative.y * settings.rotation_sensitivity
+	orbit(yaw_delta, pitch_delta)
 
 
 func _apply_transform(delta: float, snap_to_target: bool) -> void:

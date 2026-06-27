@@ -40,6 +40,8 @@ For later implementation slices, also inspect existing files under:
 - `game/scenes/test/`
 - `tools/godot/run_mmo_camera_orbit_validation.py`
 - `tools/godot/validate_mmo_camera_orbit_slice.gd`
+- `tools/godot/run_mmo_camera_mouse_look_validation.py`
+- `tools/godot/validate_mmo_camera_mouse_look_slice.gd`
 
 ## workflow
 
@@ -68,6 +70,12 @@ Current neutral orbit validation:
 
 ```powershell
 python tools/godot/run_mmo_camera_orbit_validation.py
+```
+
+Current mouse-look validation:
+
+```powershell
+python tools/godot/run_mmo_camera_mouse_look_validation.py
 ```
 
 Expected result:
