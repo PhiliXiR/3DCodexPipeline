@@ -2,6 +2,7 @@
 .godot/
 *.tmp
 *.import
+*.uid
 
 # OS/editor noise
 .DS_Store

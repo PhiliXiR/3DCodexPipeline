@@ -94,6 +94,44 @@ Validate existing generated outputs without rerunning Blender:
 python tools/validators/validate_pipeline_smoke_cube.py
 ```
 
-## Stage 2: Future Godot Import Validation
+## Stage 2: Godot Import Validation
 
-The next stage should validate that Godot can import and load the generated GLB. That stage may use a headless Godot helper script and should not introduce gameplay, a player, a level, or a themed scene.
+Stage 2 validates that Godot can import and load the generated GLB. It runs Stage 1 first by default, then starts Godot in headless mode and loads:
+
+```text
+res://assets/generated/pipeline_smoke/cube.glb
+```
+
+The Godot validation script confirms:
+
+- The GLB loads as a `PackedScene`.
+- The scene instantiates.
+- The root node uses the expected neutral pipeline smoke name.
+- Exactly one `MeshInstance3D` exists.
+- The mesh bounds are `1m x 1m x 1m`.
+
+Run Stage 2 from the repository root:
+
+```powershell
+python tools/importers/run_godot_pipeline_smoke_import.py
+```
+
+If Godot is not on `PATH`, pass:
+
+```powershell
+python tools/importers/run_godot_pipeline_smoke_import.py --godot-path "C:\Path\To\godot.exe"
+```
+
+To use an explicit Blender path while regenerating the cube:
+
+```powershell
+python tools/importers/run_godot_pipeline_smoke_import.py --blender-path "C:\Path\To\blender.exe"
+```
+
+To validate an existing generated GLB without rerunning Blender:
+
+```powershell
+python tools/importers/run_godot_pipeline_smoke_import.py --skip-blender
+```
+
+Stage 2 must not introduce gameplay, a player, a level, or a themed scene.

@@ -135,6 +135,7 @@ Asset import pipeline coordination. Importers should connect source assets, Blen
 Current scripts:
 
 - `run_pipeline_smoke_test.py`: runs the Stage 1 Blender cube smoke test and validator.
+- `run_godot_pipeline_smoke_import.py`: runs Stage 2 Godot import/load validation for the generated smoke cube.
 
 ### `tools/validators/`
 

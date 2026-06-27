@@ -36,3 +36,15 @@ python tools/importers/run_pipeline_smoke_test.py --blender-path "C:\Path\To\ble
 ```
 
 Generated outputs are written to `game/assets/generated/pipeline_smoke/` and ignored by Git.
+
+Run the Stage 2 Godot import validation from the repository root:
+
+```powershell
+python tools/importers/run_godot_pipeline_smoke_import.py
+```
+
+If Godot is not on `PATH`, pass:
+
+```powershell
+python tools/importers/run_godot_pipeline_smoke_import.py --godot-path "C:\Path\To\godot.exe"
+```

@@ -36,6 +36,7 @@ Deliverables:
 - Blender automation plan.
 - GLB export expectations.
 - Stage 1 script-generated cube smoke test.
+- Stage 2 Godot import validation.
 - Collision generation strategy.
 - Import report format.
 - Asset validation rules.

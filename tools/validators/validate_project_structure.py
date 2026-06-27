@@ -47,6 +47,8 @@ REQUIRED_FILES = [
     "tests/README.md",
     "tools/README.md",
     "tools/blender/generate_pipeline_smoke_cube.py",
+    "tools/godot/validate_pipeline_smoke_cube_import.gd",
+    "tools/importers/run_godot_pipeline_smoke_import.py",
     "tools/importers/run_pipeline_smoke_test.py",
     "tools/validators/validate_documentation_contract.py",
     "tools/validators/validate_pipeline_smoke_cube.py",

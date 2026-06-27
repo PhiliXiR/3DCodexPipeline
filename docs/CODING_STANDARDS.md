@@ -150,6 +150,14 @@ python tools/importers/run_pipeline_smoke_test.py
 
 If Blender is not on `PATH`, pass `--blender-path`.
 
+Run the Stage 2 Godot import validation from the repository root:
+
+```powershell
+python tools/importers/run_godot_pipeline_smoke_import.py
+```
+
+If Godot is not on `PATH`, pass `--godot-path`.
+
 Future testing targets:
 
 - Asset import validation.

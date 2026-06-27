@@ -41,6 +41,7 @@ REQUIRED_REFERENCES = {
         "game/assets/generated/pipeline_smoke/",
         "schema_version",
         "Stage 2",
+        "Godot Import Validation",
     ],
     "docs/adr/README.md": [
         "0000-template.md",
