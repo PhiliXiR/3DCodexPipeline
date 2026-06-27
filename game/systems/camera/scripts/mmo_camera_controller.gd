@@ -126,16 +126,26 @@ func _can_update() -> bool:
 
 
 func _handle_mouse_button(event: InputEventMouseButton) -> void:
-	if event.button_index != MOUSE_BUTTON_RIGHT:
+	if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
+		zoom_by_steps(1.0)
 		return
 
-	_is_mouse_look_active = event.pressed
+	if event.button_index == MOUSE_BUTTON_WHEEL_DOWN and event.pressed:
+		zoom_by_steps(-1.0)
+		return
+
+	if event.button_index == MOUSE_BUTTON_RIGHT:
+		_is_mouse_look_active = event.pressed
 
 
 func _handle_mouse_motion(event: InputEventMouseMotion) -> void:
 	var yaw_delta := -event.relative.x * settings.rotation_sensitivity
 	var pitch_delta := -event.relative.y * settings.rotation_sensitivity
 	orbit(yaw_delta, pitch_delta)
+
+
+func zoom_by_steps(steps: float) -> void:
+	set_preferred_distance(_preferred_distance - steps * settings.zoom_speed)
 
 
 func _apply_transform(delta: float, snap_to_target: bool) -> void:

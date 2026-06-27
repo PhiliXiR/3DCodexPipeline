@@ -42,6 +42,8 @@ For later implementation slices, also inspect existing files under:
 - `tools/godot/validate_mmo_camera_orbit_slice.gd`
 - `tools/godot/run_mmo_camera_mouse_look_validation.py`
 - `tools/godot/validate_mmo_camera_mouse_look_slice.gd`
+- `tools/godot/run_mmo_camera_zoom_validation.py`
+- `tools/godot/validate_mmo_camera_zoom_slice.gd`
 
 ## workflow
 
@@ -76,6 +78,12 @@ Current mouse-look validation:
 
 ```powershell
 python tools/godot/run_mmo_camera_mouse_look_validation.py
+```
+
+Current zoom validation:
+
+```powershell
+python tools/godot/run_mmo_camera_zoom_validation.py
 ```
 
 Expected result:
