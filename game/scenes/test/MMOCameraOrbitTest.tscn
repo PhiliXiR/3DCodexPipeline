@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="PackedScene" path="res://systems/camera/scenes/MMOCameraRig.tscn" id="1_camera"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_target"]
+size = Vector3(1, 2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_target"]
+albedo_color = Color(0.2, 0.55, 0.9, 1)
+
+[node name="MMOCameraOrbitTest" type="Node3D"]
+
+[node name="TargetProxy" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TargetProxy"]
+mesh = SubResource("BoxMesh_target")
+surface_material_override/0 = SubResource("StandardMaterial3D_target")
+
+[node name="MMOCameraRig" parent="." instance=ExtResource("1_camera")]
+target_path = NodePath("../TargetProxy")
+initial_yaw_degrees = 35.0
+initial_pitch_degrees = -18.0

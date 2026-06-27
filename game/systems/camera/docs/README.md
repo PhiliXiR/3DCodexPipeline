@@ -19,6 +19,18 @@ Primary references:
 - Collision handler.
 - Mode output adapter.
 
+## Current Slice
+
+The current implementation includes:
+
+- `MMOCameraSettings` resource.
+- `MMOCameraController` script.
+- `MMOCameraRig.tscn` reusable camera scene.
+- `MMOCameraOrbitTest.tscn` neutral validation scene.
+- `validate_mmo_camera_orbit_slice.gd` headless Godot validation.
+
+This slice proves target following and code-driven orbit against a generic target proxy. Mouse-look, zoom, collision, and mode output are intentionally handled by later issue slices.
+
 ## Future Extension Seams
 
 - Target lock.

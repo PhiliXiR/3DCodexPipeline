@@ -38,6 +38,8 @@ For later implementation slices, also inspect existing files under:
 
 - `game/systems/camera/`
 - `game/scenes/test/`
+- `tools/godot/run_mmo_camera_orbit_validation.py`
+- `tools/godot/validate_mmo_camera_orbit_slice.gd`
 
 ## workflow
 
@@ -61,6 +63,12 @@ python tools/validators/validate_repo_skills.py
 ```
 
 When camera implementation exists, also run the relevant Godot validation or smoke scene command documented by that slice.
+
+Current neutral orbit validation:
+
+```powershell
+python tools/godot/run_mmo_camera_orbit_validation.py
+```
 
 Expected result:
 
