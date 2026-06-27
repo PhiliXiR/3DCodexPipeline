@@ -135,6 +135,13 @@ Initial testing targets:
 - Required documentation.
 - ADR and glossary presence.
 
+Run the current foundation validators from the repository root:
+
+```powershell
+python tools/validators/validate_project_structure.py
+python tools/validators/validate_documentation_contract.py
+```
+
 Future testing targets:
 
 - Asset import validation.

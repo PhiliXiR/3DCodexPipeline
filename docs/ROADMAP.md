@@ -16,11 +16,13 @@ Deliverables:
 - ADR process.
 - Initial PRD.
 - Project structure validator.
+- Documentation contract validator.
 
 Exit criteria:
 
 - A new AI agent can understand the project from docs alone.
 - Required folders and docs are validated by automation.
+- The ADR workflow includes a reusable template.
 - No gameplay, theme, or content direction has been introduced.
 
 ## Phase 2: Asset Pipeline Design
@@ -166,4 +168,4 @@ Exit criteria:
 
 ## Current Status
 
-Phase 1 is in progress. The next recommended engineering task is to implement a project structure validator.
+Phase 1 is in progress. The next recommended engineering task is to define asset pipeline conventions with human approval.

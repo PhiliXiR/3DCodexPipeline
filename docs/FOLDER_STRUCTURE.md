@@ -129,7 +129,10 @@ Asset import pipeline coordination. Importers should connect source assets, Blen
 
 Validation scripts for repository structure, documentation, assets, scenes, data files, naming conventions, and import outputs.
 
-The next recommended engineering task is to add a project structure validator here.
+Current validators:
+
+- `validate_project_structure.py`: checks the foundation folder and file contract.
+- `validate_documentation_contract.py`: checks required documentation references and vocabulary.
 
 ## `tests/`
 

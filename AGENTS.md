@@ -4,6 +4,8 @@ This repository is an AI-first foundation for future 3D games built with Godot 4
 
 The highest priority is to make future development easier for both humans and AI agents through clear architecture, small modules, typed code, automation, validation, and durable documentation.
 
+All foundation work must remain theme-neutral until the human Creative Director approves a concrete game direction.
+
 ## Operating Model
 
 The human user is the Creative Director and Technical Lead.
@@ -49,6 +51,17 @@ Before changing architecture, tools, systems, or docs, read:
 - Relevant ADRs in `docs/adr/`
 
 If a term is unclear, prefer updating `docs/GLOSSARY.md` over inventing a competing name.
+
+## Required Validation
+
+After changing foundation structure or documentation, run:
+
+```powershell
+python tools/validators/validate_project_structure.py
+python tools/validators/validate_documentation_contract.py
+```
+
+If a validator fails, either fix the repository or update the validator and docs together when the project contract has intentionally changed.
 
 ## Project Philosophy
 
