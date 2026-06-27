@@ -16,6 +16,8 @@ enum CameraMode {
 @export_range(0.0, 40.0, 0.1, "or_greater") var follow_smoothing: float = 12.0
 @export_range(0.0, 40.0, 0.1, "or_greater") var rotation_smoothing: float = 18.0
 @export_range(0.0, 40.0, 0.1, "or_greater") var collision_recovery_smoothing: float = 16.0
+@export var collision_enabled: bool = true
+@export_flags_3d_physics var collision_mask: int = 1
 @export_range(0.0, 2.0, 0.01, "or_greater") var collision_buffer: float = 0.25
 @export_range(0.0, 5.0, 0.01, "or_greater") var target_height: float = 1.5
 @export var camera_mode: CameraMode = CameraMode.MMO

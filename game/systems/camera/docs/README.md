@@ -29,8 +29,9 @@ The current implementation includes:
 - `MMOCameraOrbitTest.tscn` neutral validation scene.
 - `validate_mmo_camera_orbit_slice.gd` headless Godot validation.
 - `validate_mmo_camera_zoom_slice.gd` headless Godot zoom validation.
+- `validate_mmo_camera_collision_slice.gd` headless Godot collision validation.
 
-This slice proves target following, code-driven orbit, right-mouse mouse-look, and smooth mouse-wheel zoom against a generic target proxy. Collision and mode output are intentionally handled by later issue slices.
+This slice proves target following, code-driven orbit, right-mouse mouse-look, smooth mouse-wheel zoom, and camera collision against a generic target proxy. Mode output is intentionally handled by a later issue slice.
 
 ## Validation
 
@@ -50,6 +51,12 @@ Run the zoom validation:
 
 ```powershell
 python tools/godot/run_mmo_camera_zoom_validation.py
+```
+
+Run the collision validation:
+
+```powershell
+python tools/godot/run_mmo_camera_collision_validation.py
 ```
 
 ## Future Extension Seams

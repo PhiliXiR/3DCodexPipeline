@@ -155,8 +155,43 @@ func _apply_transform(delta: float, snap_to_target: bool) -> void:
 	else:
 		var follow_weight := _get_smoothing_weight(settings.follow_smoothing, delta)
 		global_position = global_position.lerp(target_position, follow_weight)
+
+	var desired_offset := _get_orbit_offset(_current_yaw_degrees, _current_pitch_degrees, _actual_distance)
+	_actual_distance = _get_collision_limited_distance(target_position, desired_offset)
 	_camera.position = _get_orbit_offset(_current_yaw_degrees, _current_pitch_degrees, _actual_distance)
 	_camera.look_at(target_position, Vector3.UP)
+
+
+func _get_collision_limited_distance(target_position: Vector3, desired_offset: Vector3) -> float:
+	if not settings.collision_enabled:
+		return _actual_distance
+
+	var desired_distance := desired_offset.length()
+	if desired_distance <= 0.0:
+		return desired_distance
+
+	var space_state := get_world_3d().direct_space_state
+	var query := PhysicsRayQueryParameters3D.create(
+		target_position,
+		global_position + desired_offset,
+		settings.collision_mask,
+		_get_collision_exclusions()
+	)
+	query.hit_from_inside = true
+	var hit := space_state.intersect_ray(query)
+	if hit.is_empty():
+		return desired_distance
+
+	var hit_position: Vector3 = hit["position"]
+	var limited_distance := target_position.distance_to(hit_position) - settings.collision_buffer
+	return clampf(limited_distance, 0.05, desired_distance)
+
+
+func _get_collision_exclusions() -> Array[RID]:
+	var exclusions: Array[RID] = []
+	if _target is CollisionObject3D:
+		exclusions.append((_target as CollisionObject3D).get_rid())
+	return exclusions
 
 
 func _get_orbit_offset(yaw_degrees: float, pitch_degrees: float, distance: float) -> Vector3:
