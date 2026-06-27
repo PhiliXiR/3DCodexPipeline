@@ -1,0 +1,18 @@
+# Godot 4
+.godot/
+*.tmp
+*.import
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Logs and local reports
+*.log
+reports/
+
+# Blender backups
+*.blend1
+*.blend2

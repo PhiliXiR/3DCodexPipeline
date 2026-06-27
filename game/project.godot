@@ -1,0 +1,9 @@
+; Engine configuration file.
+; This is a minimal Godot 4 project shell for the reusable foundation.
+
+config_version=5
+
+[application]
+
+config/name="AI First Game Foundation"
+config/features=PackedStringArray("4.0")
