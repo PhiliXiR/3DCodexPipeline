@@ -47,6 +47,8 @@ For later implementation slices, also inspect existing files under:
 - `game/scenes/test/CharacterMovementCapsuleTest.tscn`
 - `tools/godot/run_character_movement_capsule_validation.py`
 - `tools/godot/validate_character_movement_capsule_slice.gd`
+- `tools/godot/run_character_movement_camera_relative_validation.py`
+- `tools/godot/validate_character_movement_camera_relative_slice.gd`
 
 ## workflow
 
@@ -75,6 +77,12 @@ Current neutral capsule validation:
 
 ```powershell
 python tools/godot/run_character_movement_capsule_validation.py
+```
+
+Current camera-relative movement validation:
+
+```powershell
+python tools/godot/run_character_movement_camera_relative_validation.py
 ```
 
 Expected result:

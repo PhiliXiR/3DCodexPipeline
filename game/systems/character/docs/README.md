@@ -28,8 +28,9 @@ The current implementation includes:
 - `NeutralCharacterCapsule.tscn` reusable neutral capsule scene.
 - `CharacterMovementCapsuleTest.tscn` neutral validation scene.
 - `validate_character_movement_capsule_slice.gd` headless Godot validation.
+- `validate_character_movement_camera_relative_slice.gd` headless Godot camera-relative movement validation.
 
-This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, and external movement vector hook. WASD camera-relative input, smooth facing, playable camera integration, and generated playground scenes are intentionally handled by later issue slices.
+This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, external movement vector hook, and camera-relative WASD movement. Smooth facing, playable camera integration, and generated playground scenes are intentionally handled by later issue slices.
 
 ## Validation
 
@@ -38,6 +39,21 @@ Run the neutral capsule validation:
 ```powershell
 python tools/godot/run_character_movement_capsule_validation.py
 ```
+
+Run the camera-relative movement validation:
+
+```powershell
+python tools/godot/run_character_movement_camera_relative_validation.py
+```
+
+## Input Actions
+
+The default movement settings reference these Godot input actions:
+
+- `move_forward`
+- `move_backward`
+- `move_left`
+- `move_right`
 
 ## Boundaries
 

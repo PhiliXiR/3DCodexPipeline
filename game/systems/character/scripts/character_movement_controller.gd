@@ -9,12 +9,14 @@ const CharacterMovementSettingsScript := preload("res://systems/character/script
 
 @export var settings: Resource
 @export var visual_root_path: NodePath
+@export var camera_output_provider_path: NodePath
 
 var _movement_enabled: bool = true
 var _desired_movement_direction: Vector3 = Vector3.ZERO
 var _last_nonzero_movement_direction: Vector3 = Vector3.FORWARD
 var _external_movement_vector: Vector3 = Vector3.ZERO
 var _has_external_movement_vector: bool = false
+var _camera_output_provider: Node
 var _was_moving: bool = false
 var _was_grounded: bool = false
 
@@ -22,6 +24,7 @@ var _was_grounded: bool = false
 func _ready() -> void:
 	if settings == null:
 		settings = CharacterMovementSettingsScript.new()
+	_camera_output_provider = _get_optional_node(camera_output_provider_path)
 	_was_grounded = is_on_floor()
 
 
@@ -43,6 +46,10 @@ func set_external_movement_vector(vector: Vector3) -> void:
 func clear_external_movement_vector() -> void:
 	_external_movement_vector = Vector3.ZERO
 	_has_external_movement_vector = false
+
+
+func set_camera_output_provider(provider: Node) -> void:
+	_camera_output_provider = provider
 
 
 func update_movement(delta: float) -> void:
@@ -80,16 +87,81 @@ func _get_requested_movement_direction() -> Vector3:
 	if not _movement_enabled:
 		return Vector3.ZERO
 
-	if not _has_external_movement_vector:
-		return Vector3.ZERO
+	if _has_external_movement_vector:
+		return _get_normalized_movement_direction(_external_movement_vector)
 
-	var requested := Vector3(_external_movement_vector.x, 0.0, _external_movement_vector.z)
+	return _get_input_movement_direction()
+
+
+func _get_normalized_movement_direction(direction: Vector3) -> Vector3:
+	var requested := Vector3(direction.x, 0.0, direction.z)
 	if requested.length_squared() <= 0.0001:
 		return Vector3.ZERO
 
 	var normalized := requested.normalized()
 	_last_nonzero_movement_direction = normalized
 	return normalized
+
+
+func _get_input_movement_direction() -> Vector3:
+	var forward_strength := _get_action_strength(settings.get("move_forward_action") as StringName)
+	var backward_strength := _get_action_strength(settings.get("move_backward_action") as StringName)
+	var left_strength := _get_action_strength(settings.get("move_left_action") as StringName)
+	var right_strength := _get_action_strength(settings.get("move_right_action") as StringName)
+	var input_vector := Vector2(right_strength - left_strength, forward_strength - backward_strength)
+	if input_vector.length_squared() <= 0.0001:
+		return Vector3.ZERO
+
+	input_vector = input_vector.limit_length(1.0)
+	var camera_forward := _get_camera_planar_forward()
+	var camera_right := _get_camera_planar_right()
+	return _get_normalized_movement_direction(
+		camera_forward * input_vector.y + camera_right * input_vector.x
+	)
+
+
+func _get_action_strength(action_name: StringName) -> float:
+	if not InputMap.has_action(action_name):
+		return 0.0
+	return Input.get_action_strength(action_name)
+
+
+func _get_camera_planar_forward() -> Vector3:
+	var output := _get_camera_mode_output()
+	if output == null:
+		return Vector3.FORWARD
+
+	var camera_mode: int = output.get("camera_mode") as int
+	if camera_mode != 0:
+		return Vector3.ZERO
+
+	var forward: Vector3 = output.get("camera_planar_forward") as Vector3
+	return forward.normalized() if forward.length_squared() > 0.0001 else Vector3.FORWARD
+
+
+func _get_camera_planar_right() -> Vector3:
+	var output := _get_camera_mode_output()
+	if output == null:
+		return Vector3.RIGHT
+
+	var camera_mode: int = output.get("camera_mode") as int
+	if camera_mode != 0:
+		return Vector3.ZERO
+
+	var right: Vector3 = output.get("camera_planar_right") as Vector3
+	return right.normalized() if right.length_squared() > 0.0001 else Vector3.RIGHT
+
+
+func _get_camera_mode_output() -> Resource:
+	if _camera_output_provider == null or not _camera_output_provider.has_method("get_mode_output"):
+		return null
+	return _camera_output_provider.call("get_mode_output") as Resource
+
+
+func _get_optional_node(path: NodePath) -> Node:
+	if path.is_empty():
+		return null
+	return get_node_or_null(path)
 
 
 func _apply_horizontal_velocity(delta: float) -> void:
