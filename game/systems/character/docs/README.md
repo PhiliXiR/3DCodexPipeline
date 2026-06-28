@@ -27,11 +27,13 @@ The current implementation includes:
 - `CharacterMovementController` script.
 - `NeutralCharacterCapsule.tscn` reusable neutral capsule scene.
 - `CharacterMovementCapsuleTest.tscn` neutral validation scene.
+- `PlayableCameraMovementTest.tscn` neutral playable camera + movement validation scene.
 - `validate_character_movement_capsule_slice.gd` headless Godot validation.
 - `validate_character_movement_camera_relative_slice.gd` headless Godot camera-relative movement validation.
 - `validate_character_movement_facing_slice.gd` headless Godot facing validation.
+- `validate_playable_camera_movement_scene.gd` headless Godot playable scene validation.
 
-This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, external movement vector hook, camera-relative WASD movement, and smooth MMO facing toward movement direction. Playable camera integration and generated playground scenes are intentionally handled by later issue slices.
+This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, external movement vector hook, camera-relative WASD movement, smooth MMO facing toward movement direction, and a playable neutral camera + movement validation scene. Generated playground scenes are intentionally handled by later issue slices.
 
 ## Validation
 
@@ -52,6 +54,22 @@ Run the facing validation:
 ```powershell
 python tools/godot/run_character_movement_facing_validation.py
 ```
+
+Run the playable camera + movement scene validation:
+
+```powershell
+python tools/godot/run_playable_camera_movement_validation.py
+```
+
+## Manual Test Scene
+
+Open `res://scenes/test/PlayableCameraMovementTest.tscn` in Godot to manually test the current movement and camera stack.
+
+Expected controls:
+
+- WASD movement through `move_forward`, `move_backward`, `move_left`, and `move_right`.
+- Right mouse button camera look from the MMO Camera System.
+- Mouse wheel camera zoom from the MMO Camera System.
 
 ## Input Actions
 

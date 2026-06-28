@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="PackedScene" path="res://systems/character/scenes/NeutralCharacterCapsule.tscn" id="1_capsule"]
+[ext_resource type="PackedScene" path="res://systems/camera/scenes/MMOCameraRig.tscn" id="2_camera"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(18, 0.2, 18)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(18, 0.2, 18)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.38, 0.42, 0.4, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_obstacle"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_obstacle"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_obstacle"]
+albedo_color = Color(0.55, 0.55, 0.6, 1)
+
+[node name="PlayableCameraMovementTest" type="Node3D"]
+
+[node name="NeutralCharacterCapsule" parent="." instance=ExtResource("1_capsule")]
+position = Vector3(0, 0.1, 0)
+camera_output_provider_path = NodePath("../MMOCameraRig")
+
+[node name="MMOCameraRig" parent="." instance=ExtResource("2_camera")]
+target_path = NodePath("../NeutralCharacterCapsule")
+initial_yaw_degrees = 35.0
+initial_pitch_degrees = -18.0
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+position = Vector3(0, -0.1, 0)
+shape = SubResource("BoxShape3D_floor")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+position = Vector3(0, -0.1, 0)
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+
+[node name="CameraCollisionObstacle" type="StaticBody3D" parent="."]
+position = Vector3(0, 1, 4)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraCollisionObstacle"]
+shape = SubResource("BoxShape3D_obstacle")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraCollisionObstacle"]
+mesh = SubResource("BoxMesh_obstacle")
+surface_material_override/0 = SubResource("StandardMaterial3D_obstacle")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866025, -0.353553, 0.353553, 0, 0.707107, 0.707107, -0.5, -0.612372, 0.612372, 0, 6, 0)
+light_energy = 2.0

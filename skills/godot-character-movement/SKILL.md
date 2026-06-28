@@ -45,12 +45,15 @@ For later implementation slices, also inspect existing files under:
 - `game/systems/character/docs/README.md`
 - `game/systems/camera/`
 - `game/scenes/test/CharacterMovementCapsuleTest.tscn`
+- `game/scenes/test/PlayableCameraMovementTest.tscn`
 - `tools/godot/run_character_movement_capsule_validation.py`
 - `tools/godot/validate_character_movement_capsule_slice.gd`
 - `tools/godot/run_character_movement_camera_relative_validation.py`
 - `tools/godot/validate_character_movement_camera_relative_slice.gd`
 - `tools/godot/run_character_movement_facing_validation.py`
 - `tools/godot/validate_character_movement_facing_slice.gd`
+- `tools/godot/run_playable_camera_movement_validation.py`
+- `tools/godot/validate_playable_camera_movement_scene.gd`
 
 ## workflow
 
@@ -91,6 +94,12 @@ Current facing validation:
 
 ```powershell
 python tools/godot/run_character_movement_facing_validation.py
+```
+
+Current playable scene validation:
+
+```powershell
+python tools/godot/run_playable_camera_movement_validation.py
 ```
 
 Expected result:
