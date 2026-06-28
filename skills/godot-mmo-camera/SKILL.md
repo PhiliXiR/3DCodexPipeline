@@ -46,6 +46,8 @@ For later implementation slices, also inspect existing files under:
 - `tools/godot/validate_mmo_camera_zoom_slice.gd`
 - `tools/godot/run_mmo_camera_collision_validation.py`
 - `tools/godot/validate_mmo_camera_collision_slice.gd`
+- `tools/godot/run_mmo_camera_mode_output_validation.py`
+- `tools/godot/validate_mmo_camera_mode_output_slice.gd`
 
 ## workflow
 
@@ -92,6 +94,12 @@ Current collision validation:
 
 ```powershell
 python tools/godot/run_mmo_camera_collision_validation.py
+```
+
+Current mode output validation:
+
+```powershell
+python tools/godot/run_mmo_camera_mode_output_validation.py
 ```
 
 Expected result:

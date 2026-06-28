@@ -1,6 +1,8 @@
 class_name MMOCameraController
 extends Node3D
 
+signal camera_mode_changed(camera_mode: int)
+
 @export var target_path: NodePath
 @export var camera_path: NodePath = ^"Camera3D"
 @export var settings: MMOCameraSettings
@@ -17,6 +19,7 @@ var _preferred_distance: float = 0.0
 var _actual_distance: float = 0.0
 var _is_initialized: bool = false
 var _is_mouse_look_active: bool = false
+var _mode_output: MMOCameraModeOutput = MMOCameraModeOutput.new()
 
 
 func _ready() -> void:
@@ -55,6 +58,24 @@ func set_target(target: Node3D) -> void:
 
 func set_preferred_distance(distance: float) -> void:
 	_preferred_distance = settings.get_clamped_distance(distance)
+
+
+func set_camera_mode(camera_mode: int) -> void:
+	if settings == null:
+		settings = MMOCameraSettings.new()
+
+	if settings.camera_mode == camera_mode:
+		return
+
+	settings.camera_mode = camera_mode
+	_update_mode_output()
+	camera_mode_changed.emit(camera_mode)
+
+
+func get_camera_mode() -> int:
+	if settings == null:
+		return MMOCameraSettings.CameraMode.MMO
+	return settings.camera_mode
 
 
 func orbit(yaw_delta_degrees: float, pitch_delta_degrees: float) -> void:
@@ -102,6 +123,11 @@ func get_actual_distance() -> float:
 
 func is_mouse_look_active() -> bool:
 	return _is_mouse_look_active
+
+
+func get_mode_output() -> MMOCameraModeOutput:
+	_update_mode_output()
+	return _mode_output
 
 
 func get_camera_forward() -> Vector3:
@@ -160,6 +186,17 @@ func _apply_transform(delta: float, snap_to_target: bool) -> void:
 	_actual_distance = _get_collision_limited_distance(target_position, desired_offset)
 	_camera.position = _get_orbit_offset(_current_yaw_degrees, _current_pitch_degrees, _actual_distance)
 	_camera.look_at(target_position, Vector3.UP)
+	_update_mode_output()
+
+
+func _update_mode_output() -> void:
+	_mode_output.update_from_camera(
+		get_camera_mode(),
+		get_camera_forward(),
+		get_camera_planar_forward(),
+		get_camera_planar_right(),
+		_is_mouse_look_active
+	)
 
 
 func _get_collision_limited_distance(target_position: Vector3, desired_offset: Vector3) -> float:

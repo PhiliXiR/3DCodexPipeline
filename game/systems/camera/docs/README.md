@@ -40,14 +40,16 @@ Current public direction helpers:
 The current implementation includes:
 
 - `MMOCameraSettings` resource.
+- `MMOCameraModeOutput` read-only output resource.
 - `MMOCameraController` script.
 - `MMOCameraRig.tscn` reusable camera scene.
 - `MMOCameraOrbitTest.tscn` neutral validation scene.
 - `validate_mmo_camera_orbit_slice.gd` headless Godot validation.
 - `validate_mmo_camera_zoom_slice.gd` headless Godot zoom validation.
 - `validate_mmo_camera_collision_slice.gd` headless Godot collision validation.
+- `validate_mmo_camera_mode_output_slice.gd` headless Godot mode output validation.
 
-This slice proves target following, code-driven orbit, right-mouse mouse-look, smooth mouse-wheel zoom, and camera collision against a generic target proxy. Mode output is intentionally handled by a later issue slice.
+This slice proves target following, code-driven orbit, right-mouse mouse-look, smooth mouse-wheel zoom, camera collision, and camera mode output against a generic target proxy.
 
 ## Validation
 
@@ -73,6 +75,12 @@ Run the collision validation:
 
 ```powershell
 python tools/godot/run_mmo_camera_collision_validation.py
+```
+
+Run the mode output validation:
+
+```powershell
+python tools/godot/run_mmo_camera_mode_output_validation.py
 ```
 
 ## Future Extension Seams

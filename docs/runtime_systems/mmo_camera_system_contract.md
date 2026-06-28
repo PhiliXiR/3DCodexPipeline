@@ -112,6 +112,7 @@ Future movement and character systems may read:
 - `preferred_distance`: the user-selected camera distance before collision resolution.
 - `actual_distance`: the resolved camera distance after smoothing and collision limits.
 - `is_mouse_look_active`: whether right-mouse look is currently active.
+- `mode_output`: a reusable read-only output object containing the current mode and camera-facing vectors.
 
 Future character systems are responsible for:
 
@@ -149,6 +150,7 @@ get_pitch()
 get_preferred_distance()
 get_actual_distance()
 is_mouse_look_active()
+get_mode_output()
 get_camera_forward()
 get_camera_planar_forward()
 get_camera_planar_right()
