@@ -49,6 +49,8 @@ For later implementation slices, also inspect existing files under:
 - `tools/godot/validate_character_movement_capsule_slice.gd`
 - `tools/godot/run_character_movement_camera_relative_validation.py`
 - `tools/godot/validate_character_movement_camera_relative_slice.gd`
+- `tools/godot/run_character_movement_facing_validation.py`
+- `tools/godot/validate_character_movement_facing_slice.gd`
 
 ## workflow
 
@@ -83,6 +85,12 @@ Current camera-relative movement validation:
 
 ```powershell
 python tools/godot/run_character_movement_camera_relative_validation.py
+```
+
+Current facing validation:
+
+```powershell
+python tools/godot/run_character_movement_facing_validation.py
 ```
 
 Expected result:

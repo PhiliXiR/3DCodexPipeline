@@ -57,6 +57,7 @@ func update_movement(delta: float) -> void:
 		settings = CharacterMovementSettingsScript.new()
 
 	_desired_movement_direction = _get_requested_movement_direction()
+	_apply_facing(delta)
 	_apply_horizontal_velocity(delta)
 	_apply_gravity(delta)
 	move_and_slide()
@@ -162,6 +163,16 @@ func _get_optional_node(path: NodePath) -> Node:
 	if path.is_empty():
 		return null
 	return get_node_or_null(path)
+
+
+func _apply_facing(delta: float) -> void:
+	if _desired_movement_direction.length_squared() <= 0.0001:
+		return
+
+	var target_yaw := atan2(-_desired_movement_direction.x, -_desired_movement_direction.z)
+	var turn_speed: float = settings.get("turn_speed") as float
+	var weight := _get_smoothing_weight(turn_speed, delta)
+	rotation.y = rotation.y + angle_difference(rotation.y, target_yaw) * weight
 
 
 func _apply_horizontal_velocity(delta: float) -> void:

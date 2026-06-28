@@ -29,8 +29,9 @@ The current implementation includes:
 - `CharacterMovementCapsuleTest.tscn` neutral validation scene.
 - `validate_character_movement_capsule_slice.gd` headless Godot validation.
 - `validate_character_movement_camera_relative_slice.gd` headless Godot camera-relative movement validation.
+- `validate_character_movement_facing_slice.gd` headless Godot facing validation.
 
-This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, external movement vector hook, and camera-relative WASD movement. Smooth facing, playable camera integration, and generated playground scenes are intentionally handled by later issue slices.
+This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, external movement vector hook, camera-relative WASD movement, and smooth MMO facing toward movement direction. Playable camera integration and generated playground scenes are intentionally handled by later issue slices.
 
 ## Validation
 
@@ -46,6 +47,12 @@ Run the camera-relative movement validation:
 python tools/godot/run_character_movement_camera_relative_validation.py
 ```
 
+Run the facing validation:
+
+```powershell
+python tools/godot/run_character_movement_facing_validation.py
+```
+
 ## Input Actions
 
 The default movement settings reference these Godot input actions:
@@ -59,5 +66,6 @@ The default movement settings reference these Godot input actions:
 
 - Use a neutral capsule/proxy before Synty humanoid integration.
 - Implement MMO-style WASD movement before Action-mode behavior.
+- Rotate toward movement direction in MMO mode; do not implement Action-mode camera-facing behavior yet.
 - Keep camera orbit, zoom, and collision inside the MMO Camera System.
 - Keep generated playgrounds neutral and separate from movement controller implementation.
