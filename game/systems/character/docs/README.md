@@ -21,9 +21,23 @@ Primary references:
 
 ## Current Slice
 
-The current slice defines the runtime contract and architecture boundary only.
+The current implementation includes:
 
-Implementation is intentionally deferred to later `Character Movement` issues.
+- `CharacterMovementSettings` resource.
+- `CharacterMovementController` script.
+- `NeutralCharacterCapsule.tscn` reusable neutral capsule scene.
+- `CharacterMovementCapsuleTest.tscn` neutral validation scene.
+- `validate_character_movement_capsule_slice.gd` headless Godot validation.
+
+This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, and external movement vector hook. WASD camera-relative input, smooth facing, playable camera integration, and generated playground scenes are intentionally handled by later issue slices.
+
+## Validation
+
+Run the neutral capsule validation:
+
+```powershell
+python tools/godot/run_character_movement_capsule_validation.py
+```
 
 ## Boundaries
 

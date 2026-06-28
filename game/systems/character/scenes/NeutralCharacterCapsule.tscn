@@ -1,0 +1,40 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://systems/character/scripts/character_movement_controller.gd" id="1_controller"]
+[ext_resource type="Resource" path="res://systems/character/resources/default_character_movement_settings.tres" id="2_settings"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_capsule"]
+radius = 0.45
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_capsule"]
+radius = 0.45
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_capsule"]
+albedo_color = Color(0.35, 0.62, 0.85, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_forward_marker"]
+radius = 0.12
+height = 0.24
+
+[node name="NeutralCharacterCapsule" type="CharacterBody3D"]
+script = ExtResource("1_controller")
+settings = ExtResource("2_settings")
+visual_root_path = NodePath("VisualRoot")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+position = Vector3(0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_capsule")
+
+[node name="VisualRoot" type="Node3D" parent="."]
+
+[node name="CapsuleMesh" type="MeshInstance3D" parent="VisualRoot"]
+position = Vector3(0, 0.9, 0)
+mesh = SubResource("CapsuleMesh_capsule")
+surface_material_override/0 = SubResource("StandardMaterial3D_capsule")
+
+[node name="ForwardMarker" type="MeshInstance3D" parent="VisualRoot"]
+position = Vector3(0, 1.35, -0.48)
+mesh = SubResource("SphereMesh_forward_marker")
+surface_material_override/0 = SubResource("StandardMaterial3D_capsule")

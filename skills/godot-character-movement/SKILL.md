@@ -38,9 +38,15 @@ Before acting, read:
 
 For later implementation slices, also inspect existing files under:
 
-- `game/systems/character/`
+- `game/systems/character/scripts/character_movement_settings.gd`
+- `game/systems/character/scripts/character_movement_controller.gd`
+- `game/systems/character/resources/default_character_movement_settings.tres`
+- `game/systems/character/scenes/NeutralCharacterCapsule.tscn`
+- `game/systems/character/docs/README.md`
 - `game/systems/camera/`
-- `game/scenes/test/`
+- `game/scenes/test/CharacterMovementCapsuleTest.tscn`
+- `tools/godot/run_character_movement_capsule_validation.py`
+- `tools/godot/validate_character_movement_capsule_slice.gd`
 
 ## workflow
 
@@ -64,6 +70,12 @@ python tools/validators/validate_repo_skills.py
 ```
 
 When movement implementation exists, also run the relevant Godot validation command documented by that slice.
+
+Current neutral capsule validation:
+
+```powershell
+python tools/godot/run_character_movement_capsule_validation.py
+```
 
 Expected result:
 
