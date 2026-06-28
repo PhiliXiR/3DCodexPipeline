@@ -10,3 +10,4 @@ See `docs/SKILL_LIFECYCLE.md` for lifecycle and promotion rules.
 
 - `godot-asset-pipeline-smoke`: workflow for extending and validating the generated cube Blender-to-Godot smoke pipeline.
 - `godot-mmo-camera`: workflow for building and extending the reusable MMO-style third-person camera system.
+- `godot-character-movement`: workflow for building and extending the reusable MMO-style character movement system.

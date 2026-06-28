@@ -78,6 +78,18 @@ A camera integration mode where a future character system may rotate the charact
 
 A camera component that exposes read-only camera mode and direction data to future character systems without implementing character movement, animation, or physics.
 
+### Character Movement System
+
+A reusable movement runtime system built around neutral `CharacterBody3D` movement, camera-relative WASD input, gravity, floor collision, and configurable facing behavior.
+
+### Neutral Character Proxy
+
+A simple capsule or generic visual marker used to validate movement before final character assets, rigs, and animations are introduced.
+
+### Playable Validation Scene
+
+A neutral scene that combines reusable systems so a developer can manually verify behavior without introducing game-specific levels, mechanics, or theme.
+
 ## Tooling Terms
 
 ### Blender Automation
