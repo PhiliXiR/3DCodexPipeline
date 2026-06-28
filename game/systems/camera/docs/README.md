@@ -40,6 +40,7 @@ Current public direction helpers:
 The current implementation includes:
 
 - `MMOCameraSettings` resource.
+- `MMOCameraExtensionHooks` passive extension hook resource.
 - `MMOCameraModeOutput` read-only output resource.
 - `MMOCameraController` script.
 - `MMOCameraRig.tscn` reusable camera scene.
@@ -48,8 +49,9 @@ The current implementation includes:
 - `validate_mmo_camera_zoom_slice.gd` headless Godot zoom validation.
 - `validate_mmo_camera_collision_slice.gd` headless Godot collision validation.
 - `validate_mmo_camera_mode_output_slice.gd` headless Godot mode output validation.
+- `validate_mmo_camera_extension_hooks_slice.gd` headless Godot extension hook validation.
 
-This slice proves target following, code-driven orbit, right-mouse mouse-look, smooth mouse-wheel zoom, camera collision, and camera mode output against a generic target proxy.
+This slice proves target following, code-driven orbit, right-mouse mouse-look, smooth mouse-wheel zoom, camera collision, camera mode output, and passive future extension hooks against a generic target proxy.
 
 ## Validation
 
@@ -83,8 +85,14 @@ Run the mode output validation:
 python tools/godot/run_mmo_camera_mode_output_validation.py
 ```
 
+Run the extension hooks validation:
+
+```powershell
+python tools/godot/run_mmo_camera_extension_hooks_validation.py
+```
+
 ## Future Extension Seams
 
-- Target lock.
-- Camera shake.
-- Camera zones.
+- Target lock: provider hook only; no target selection, framing, or tracking behavior yet.
+- Camera shake: provider hook only; no additive offsets, decay, or shake events yet.
+- Camera zones: provider hook only; no trigger volumes, setting overrides, or transition rules yet.

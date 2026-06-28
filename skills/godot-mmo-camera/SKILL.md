@@ -48,6 +48,8 @@ For later implementation slices, also inspect existing files under:
 - `tools/godot/validate_mmo_camera_collision_slice.gd`
 - `tools/godot/run_mmo_camera_mode_output_validation.py`
 - `tools/godot/validate_mmo_camera_mode_output_slice.gd`
+- `tools/godot/run_mmo_camera_extension_hooks_validation.py`
+- `tools/godot/validate_mmo_camera_extension_hooks_slice.gd`
 
 ## workflow
 
@@ -59,6 +61,7 @@ For later implementation slices, also inspect existing files under:
 6. Avoid adding player movement or game-specific behavior.
 7. Update camera docs and this skill when workflow knowledge changes.
 8. Run foundation validators and any camera-specific validation available for the slice.
+9. For future extension seam work, expose passive hooks only until a target lock, shake, or zone behavior slice is explicitly approved.
 
 ## validation
 
@@ -100,6 +103,12 @@ Current mode output validation:
 
 ```powershell
 python tools/godot/run_mmo_camera_mode_output_validation.py
+```
+
+Current extension hooks validation:
+
+```powershell
+python tools/godot/run_mmo_camera_extension_hooks_validation.py
 ```
 
 Expected result:

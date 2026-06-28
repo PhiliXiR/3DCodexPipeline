@@ -12,7 +12,8 @@ Current contract:
 - Collision obstruction handling.
 - MMO mode and Action mode integration semantics.
 - Read-only character-facing outputs for future movement systems.
-- Future seams for target lock, camera shake, and camera zones.
+- Passive future seams for target lock, camera shake, and camera zones.
+- No target selection, shake offsets, zone triggers, or setting override behavior before approved slices.
 - No player controller.
 - No gameplay scene.
 - No theme or game-specific assumptions.

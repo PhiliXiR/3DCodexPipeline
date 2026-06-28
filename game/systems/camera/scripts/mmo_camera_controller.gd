@@ -3,11 +3,17 @@ extends Node3D
 
 signal camera_mode_changed(camera_mode: int)
 
+const MMOCameraExtensionHooksScript := preload("res://systems/camera/scripts/mmo_camera_extension_hooks.gd")
+
 @export var target_path: NodePath
 @export var camera_path: NodePath = ^"Camera3D"
 @export var settings: MMOCameraSettings
 @export var initial_yaw_degrees: float = 0.0
 @export var initial_pitch_degrees: float = -20.0
+@export_group("Extension Hooks")
+@export var target_lock_provider_path: NodePath
+@export var camera_shake_provider_path: NodePath
+@export var camera_zone_provider_path: NodePath
 
 var _target: Node3D
 var _camera: Camera3D
@@ -20,6 +26,7 @@ var _actual_distance: float = 0.0
 var _is_initialized: bool = false
 var _is_mouse_look_active: bool = false
 var _mode_output: MMOCameraModeOutput = MMOCameraModeOutput.new()
+var _extension_hooks: Resource = MMOCameraExtensionHooksScript.new()
 
 
 func _ready() -> void:
@@ -34,6 +41,7 @@ func _ready() -> void:
 	_current_pitch_degrees = _desired_pitch_degrees
 	_preferred_distance = settings.get_clamped_distance(settings.default_distance)
 	_actual_distance = _preferred_distance
+	_resolve_extension_hooks()
 	_is_initialized = true
 	force_update()
 
@@ -130,6 +138,14 @@ func get_mode_output() -> MMOCameraModeOutput:
 	return _mode_output
 
 
+func configure_extension_hooks(target_lock_provider: Node, camera_shake_provider: Node, camera_zone_provider: Node) -> void:
+	_extension_hooks.configure(target_lock_provider, camera_shake_provider, camera_zone_provider)
+
+
+func get_extension_hooks() -> Resource:
+	return _extension_hooks
+
+
 func get_camera_forward() -> Vector3:
 	if _camera == null:
 		return -global_transform.basis.z
@@ -149,6 +165,20 @@ func get_camera_planar_right() -> Vector3:
 
 func _can_update() -> bool:
 	return _is_initialized and settings != null and _target != null and _camera != null
+
+
+func _resolve_extension_hooks() -> void:
+	_extension_hooks.configure(
+		_get_optional_node(target_lock_provider_path),
+		_get_optional_node(camera_shake_provider_path),
+		_get_optional_node(camera_zone_provider_path)
+	)
+
+
+func _get_optional_node(path: NodePath) -> Node:
+	if path.is_empty():
+		return null
+	return get_node_or_null(path)
 
 
 func _handle_mouse_button(event: InputEventMouseButton) -> void:

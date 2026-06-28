@@ -177,13 +177,19 @@ Signals should be integration hooks, not hidden control flow.
 
 Reserve a seam for a future target provider. When implemented later, the camera may frame both player and target while preserving orbit and zoom limits.
 
+The current foundation may expose a target lock provider hook, but it must not frame, select, validate, or track lock targets until an approved target lock slice exists.
+
 ### Camera Shake
 
 Reserve a seam for additive camera offsets from future shake providers. Shake should be optional and layered after base orbit/zoom/collision placement.
 
+The current foundation may expose a camera shake provider hook, but it must not apply additive offsets, trauma curves, decay, or shake events until an approved shake slice exists.
+
 ### Camera Zones
 
 Reserve a seam for future zone override providers. Zones may override zoom, pitch, rotation limits, follow speed, and related settings.
+
+The current foundation may expose a camera zone provider hook, but it must not implement trigger volumes, overrides, transitions, or priority rules until an approved camera zone slice exists.
 
 ## Performance Expectations
 
