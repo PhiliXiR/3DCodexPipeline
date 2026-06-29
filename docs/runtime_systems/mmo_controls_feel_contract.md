@@ -40,7 +40,10 @@ The MMO Controls Feel layer must not:
 
 ### Current Implementation Slice
 
-The first implementation slice provides `MMOControlsMouseState`, a reusable resource that tracks LMB, RMB, and both-buttons state and exposes derived camera orbit, character-facing, and mouse-forward intent.
+The first implementation slices provide:
+
+- `MMOControlsMouseState`, a reusable resource that tracks LMB, RMB, and both-buttons state and exposes derived camera orbit, character-facing, and mouse-forward intent.
+- `MMOControlsCursorPolicy`, a reusable resource that captures the cursor while mouse-look is active and restores the previous mouse mode when mouse-look ends.
 
 ### Controls Feel Settings Resource
 
@@ -193,6 +196,7 @@ Validation should cover:
 - RMB-only look state.
 - Both-buttons state.
 - Cursor capture transitions.
+- Cursor restoration after releasing the final mouse-look button.
 - A/D mode selection.
 - RMB-facing intent.
 - Both-buttons forward intent.

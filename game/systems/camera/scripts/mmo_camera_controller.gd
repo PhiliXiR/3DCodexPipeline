@@ -4,6 +4,7 @@ extends Node3D
 signal camera_mode_changed(camera_mode: int)
 
 const MMOCameraExtensionHooksScript := preload("res://systems/camera/scripts/mmo_camera_extension_hooks.gd")
+const MMOControlsCursorPolicyScript := preload("res://systems/controls/scripts/mmo_controls_cursor_policy.gd")
 const MMOControlsMouseStateScript := preload("res://systems/controls/scripts/mmo_controls_mouse_state.gd")
 
 @export var target_path: NodePath
@@ -29,6 +30,7 @@ var _is_mouse_look_active: bool = false
 var _mode_output: MMOCameraModeOutput = MMOCameraModeOutput.new()
 var _extension_hooks: Resource = MMOCameraExtensionHooksScript.new()
 var _controls_mouse_state: Resource = MMOControlsMouseStateScript.new()
+var _cursor_policy: Resource = MMOControlsCursorPolicyScript.new()
 
 
 func _ready() -> void:
@@ -44,8 +46,13 @@ func _ready() -> void:
 	_preferred_distance = settings.get_clamped_distance(settings.default_distance)
 	_actual_distance = _preferred_distance
 	_resolve_extension_hooks()
+	_controls_mouse_state.mouse_button_state_changed.connect(_on_controls_mouse_state_changed)
 	_is_initialized = true
 	force_update()
+
+
+func _exit_tree() -> void:
+	_cursor_policy.force_release()
 
 
 func _process(delta: float) -> void:
@@ -139,6 +146,18 @@ func get_controls_mouse_state() -> Resource:
 	return _controls_mouse_state
 
 
+func get_cursor_policy() -> Resource:
+	return _cursor_policy
+
+
+func set_cursor_policy(cursor_policy: Resource) -> void:
+	if cursor_policy == null:
+		_cursor_policy = MMOControlsCursorPolicyScript.new()
+	else:
+		_cursor_policy = cursor_policy
+	_cursor_policy.apply_look_active(_controls_mouse_state.should_orbit_camera())
+
+
 func get_mouse_button_state() -> int:
 	return _controls_mouse_state.get_mouse_button_state()
 
@@ -228,6 +247,11 @@ func _handle_mouse_motion(event: InputEventMouseMotion) -> void:
 	var yaw_delta := -event.relative.x * settings.rotation_sensitivity
 	var pitch_delta := -event.relative.y * settings.rotation_sensitivity
 	orbit(yaw_delta, pitch_delta)
+
+
+func _on_controls_mouse_state_changed(_left_pressed: bool, _right_pressed: bool) -> void:
+	_is_mouse_look_active = _controls_mouse_state.should_orbit_camera()
+	_cursor_policy.apply_look_active(_is_mouse_look_active)
 
 
 func zoom_by_steps(steps: float) -> void:

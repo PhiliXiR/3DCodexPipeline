@@ -27,6 +27,8 @@ The camera exposes read-only direction and mode data for future character system
 
 The MMO Controls Feel Layer may decide when mouse-look, camera-facing intent, both-buttons movement, cursor capture, or A/D behavior are active. The camera consumes look intent and exposes camera output; it does not own movement semantics.
 
+The current camera rig applies the controls cursor policy while mouse-look is active. Future UI flows may replace or disable that policy without changing orbit, zoom, or collision behavior.
+
 Mode semantics:
 
 - MMO mode: future character systems rotate toward movement direction while the camera orbits independently.

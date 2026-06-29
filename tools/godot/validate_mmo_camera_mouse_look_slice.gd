@@ -17,6 +17,8 @@ func _run_validation() -> void:
 
 	var scene: Node = (packed_scene as PackedScene).instantiate()
 	root.add_child(scene)
+	var original_mouse_mode := Input.mouse_mode
+	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
 	var camera_rig: Node = scene.get_node_or_null(CAMERA_RIG_PATH)
 	if camera_rig == null:
@@ -44,6 +46,9 @@ func _run_validation() -> void:
 
 	if not camera_rig.call("is_mouse_look_active") as bool:
 		failures.append("Right mouse press did not enable mouse look")
+	var cursor_policy: Resource = camera_rig.call("get_cursor_policy") as Resource
+	if cursor_policy.call("get_requested_mouse_mode") as int != Input.MOUSE_MODE_CAPTURED:
+		failures.append("Right mouse press did not request cursor capture")
 
 	var motion := InputEventMouseMotion.new()
 	motion.relative = Vector2(20.0, -10.0)
@@ -74,6 +79,8 @@ func _run_validation() -> void:
 
 	if camera_rig.call("is_mouse_look_active") as bool:
 		failures.append("Right mouse release did not disable mouse look")
+	if cursor_policy.call("get_requested_mouse_mode") as int != Input.MOUSE_MODE_VISIBLE:
+		failures.append("Right mouse release did not request cursor restore")
 
 	var left_press := InputEventMouseButton.new()
 	left_press.button_index = MOUSE_BUTTON_LEFT
@@ -82,6 +89,8 @@ func _run_validation() -> void:
 
 	if not camera_rig.call("is_mouse_look_active") as bool:
 		failures.append("Left mouse press did not enable camera orbit look")
+	if cursor_policy.call("get_requested_mouse_mode") as int != Input.MOUSE_MODE_CAPTURED:
+		failures.append("Left mouse press did not request cursor capture")
 	if not camera_rig.call("is_left_mouse_look_active") as bool:
 		failures.append("Left mouse press did not expose left-only look state")
 	if camera_rig.call("should_face_camera_direction") as bool:
@@ -106,7 +115,10 @@ func _run_validation() -> void:
 	left_release.button_index = MOUSE_BUTTON_LEFT
 	left_release.pressed = false
 	camera_rig.call("_unhandled_input", left_release)
+	if cursor_policy.call("get_requested_mouse_mode") as int != Input.MOUSE_MODE_VISIBLE:
+		failures.append("Releasing both mouse buttons did not request cursor restore")
 
+	Input.mouse_mode = original_mouse_mode
 	scene.queue_free()
 	_finish(failures)
 
