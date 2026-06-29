@@ -34,10 +34,13 @@ The current implementation includes:
 - `validate_character_movement_capsule_slice.gd` headless Godot validation.
 - `validate_character_movement_camera_relative_slice.gd` headless Godot camera-relative movement validation.
 - `validate_character_movement_facing_slice.gd` headless Godot facing validation.
+- `validate_character_movement_lateral_mode_slice.gd` headless Godot A/D mode validation.
 - `validate_playable_camera_movement_scene.gd` headless Godot playable scene validation.
 - `validate_generated_neutral_playground_scene.gd` headless Godot playground validation.
 
 This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, external movement vector hook, camera-relative WASD movement, smooth MMO facing toward movement direction, a playable neutral camera + movement validation scene, and a generated neutral lit playground scene.
+
+The recommended foundation A/D default is `STRAFE`, preserving the current camera-relative capsule behavior. `TURN` is available for MMO-style keyboard turning: A/D rotate the neutral proxy in place and do not produce lateral velocity. Forward/backward movement remains camera-relative until a later controls-feel slice connects RMB-facing movement.
 
 ## Validation
 
@@ -57,6 +60,12 @@ Run the facing validation:
 
 ```powershell
 python tools/godot/run_character_movement_facing_validation.py
+```
+
+Run the lateral input mode validation:
+
+```powershell
+python tools/godot/run_character_movement_lateral_mode_validation.py
 ```
 
 Run the playable camera + movement scene validation:

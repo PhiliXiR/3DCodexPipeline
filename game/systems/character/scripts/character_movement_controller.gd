@@ -16,6 +16,7 @@ var _desired_movement_direction: Vector3 = Vector3.ZERO
 var _last_nonzero_movement_direction: Vector3 = Vector3.FORWARD
 var _external_movement_vector: Vector3 = Vector3.ZERO
 var _has_external_movement_vector: bool = false
+var _turn_input_axis: float = 0.0
 var _camera_output_provider: Node
 var _was_moving: bool = false
 var _was_grounded: bool = false
@@ -57,6 +58,7 @@ func update_movement(delta: float) -> void:
 		settings = CharacterMovementSettingsScript.new()
 
 	_desired_movement_direction = _get_requested_movement_direction()
+	_apply_keyboard_turn_input(delta)
 	_apply_facing(delta)
 	_apply_horizontal_velocity(delta)
 	_apply_gravity(delta)
@@ -74,6 +76,10 @@ func get_current_velocity() -> Vector3:
 
 func get_last_nonzero_movement_direction() -> Vector3:
 	return _last_nonzero_movement_direction
+
+
+func get_turn_input_axis() -> float:
+	return _turn_input_axis
 
 
 func is_moving() -> bool:
@@ -109,7 +115,13 @@ func _get_input_movement_direction() -> Vector3:
 	var backward_strength := _get_action_strength(settings.get("move_backward_action") as StringName)
 	var left_strength := _get_action_strength(settings.get("move_left_action") as StringName)
 	var right_strength := _get_action_strength(settings.get("move_right_action") as StringName)
-	var input_vector := Vector2(right_strength - left_strength, forward_strength - backward_strength)
+	var lateral_axis := right_strength - left_strength
+	_turn_input_axis = 0.0
+	if settings.get("lateral_input_mode") as int == CharacterMovementSettingsScript.LateralInputMode.TURN:
+		_turn_input_axis = lateral_axis
+		lateral_axis = 0.0
+
+	var input_vector := Vector2(lateral_axis, forward_strength - backward_strength)
 	if input_vector.length_squared() <= 0.0001:
 		return Vector3.ZERO
 
@@ -173,6 +185,18 @@ func _apply_facing(delta: float) -> void:
 	var turn_speed: float = settings.get("turn_speed") as float
 	var weight := _get_smoothing_weight(turn_speed, delta)
 	rotation.y = rotation.y + angle_difference(rotation.y, target_yaw) * weight
+
+
+func _apply_keyboard_turn_input(delta: float) -> void:
+	if absf(_turn_input_axis) <= 0.0001:
+		return
+
+	var camera_mode_output := _get_camera_mode_output()
+	if camera_mode_output != null and camera_mode_output.get("camera_mode") as int != 0:
+		return
+
+	var keyboard_turn_speed: float = settings.get("keyboard_turn_speed_degrees") as float
+	rotation.y -= deg_to_rad(keyboard_turn_speed) * _turn_input_axis * delta
 
 
 func _apply_horizontal_velocity(delta: float) -> void:

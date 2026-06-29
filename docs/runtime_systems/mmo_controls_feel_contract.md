@@ -140,6 +140,8 @@ Expected default:
 
 The current recommended foundation default is strafe, because the existing capsule movement slice already uses camera-relative strafe behavior and it is easier to validate without animation. Turn mode should be supported as a first-class option before final game tuning.
 
+Turn mode currently means A/D rotate the neutral character proxy without adding lateral movement. Forward/backward movement remains camera-relative until a later approved slice connects RMB-facing movement and fuller MMO locomotion feel.
+
 ## Integration Boundaries
 
 The controls-feel layer coordinates intent. It does not own camera transform math or movement physics.

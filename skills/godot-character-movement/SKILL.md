@@ -13,6 +13,7 @@ Good uses:
 
 - Implementing a character movement issue from the `Character Movement` issue series.
 - Updating movement contracts, neutral capsule controller work, camera-relative WASD movement, smooth facing, playable validation scenes, or generated playground support.
+- Updating configurable A/D strafe versus turn behavior.
 - Updating movement docs, ADRs, test scenes, or validation commands.
 - Preparing the movement workflow for promotion to a shareable skill.
 
@@ -55,6 +56,8 @@ For later implementation slices, also inspect existing files under:
 - `tools/godot/validate_character_movement_camera_relative_slice.gd`
 - `tools/godot/run_character_movement_facing_validation.py`
 - `tools/godot/validate_character_movement_facing_slice.gd`
+- `tools/godot/run_character_movement_lateral_mode_validation.py`
+- `tools/godot/validate_character_movement_lateral_mode_slice.gd`
 - `tools/godot/run_playable_camera_movement_validation.py`
 - `tools/godot/validate_playable_camera_movement_scene.gd`
 - `tools/godot/run_generated_neutral_playground_validation.py`
@@ -99,6 +102,12 @@ Current facing validation:
 
 ```powershell
 python tools/godot/run_character_movement_facing_validation.py
+```
+
+Current lateral input mode validation:
+
+```powershell
+python tools/godot/run_character_movement_lateral_mode_validation.py
 ```
 
 Current playable scene validation:

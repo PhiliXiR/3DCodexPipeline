@@ -51,6 +51,8 @@ Expected settings include:
 - Gravity.
 - Maximum fall speed.
 - Turn speed.
+- Keyboard turn speed.
+- Lateral input mode for A/D behavior.
 - Input action names for forward, backward, left, and right.
 - Movement mode or reserved mode integration settings.
 
@@ -87,7 +89,9 @@ MMO mode is the first implemented movement mode.
 In MMO mode:
 
 - WASD input maps to camera-relative planar movement.
-- The character rotates toward movement direction.
+- In the recommended default, A/D strafe left and right relative to camera orientation.
+- When configured for turn mode, A/D rotate the character proxy without producing lateral movement.
+- The character rotates toward movement direction, except direct keyboard turn input may rotate the proxy in place.
 - The camera remains independent and may orbit around the target.
 - The controller does not force the character to face camera forward while idle.
 
@@ -157,7 +161,7 @@ Expected controls-feel semantics:
 
 - RMB-held movement may request that the character faces camera planar forward.
 - Both mouse buttons may request forward movement without requiring `move_forward` to be pressed.
-- A/D behavior should be configurable between strafe and turn semantics.
+- A/D behavior is configurable between strafe and turn semantics. The current foundation default is strafe because it preserves the existing neutral capsule behavior and remains easiest to validate before animation and full RMB-facing movement are added.
 
 The movement system remains responsible for translating approved movement intent into velocity, floor interaction, gravity, and character-facing rotation. It must not own camera orbit, cursor capture, mouse-look state transitions, or input rebinding persistence.
 
