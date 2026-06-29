@@ -1,0 +1,140 @@
+[gd_scene load_steps=13 format=3]
+
+[ext_resource type="PackedScene" path="res://systems/character/scenes/NeutralCharacterCapsule.tscn" id="1_capsule"]
+[ext_resource type="PackedScene" path="res://systems/camera/scenes/MMOCameraRig.tscn" id="2_camera"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_floor"]
+size = Vector3(36, 0.2, 36)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_floor"]
+size = Vector3(36, 0.2, 36)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_floor"]
+albedo_color = Color(0.36, 0.4, 0.38, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_boundary_long"]
+size = Vector3(36, 1.2, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_boundary_long"]
+size = Vector3(36, 1.2, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_boundary_short"]
+size = Vector3(0.8, 1.2, 36)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_boundary_short"]
+size = Vector3(0.8, 1.2, 36)
+
+[sub_resource type="BoxMesh" id="BoxMesh_block"]
+size = Vector3(2.5, 2.5, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_block"]
+size = Vector3(2.5, 2.5, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_block"]
+albedo_color = Color(0.55, 0.57, 0.62, 1)
+
+[node name="GeneratedNeutralPlayground" type="Node3D"]
+
+[node name="SpawnPoint" type="Marker3D" parent="."]
+position = Vector3(0, 0.1, 0)
+
+[node name="NeutralCharacterCapsule" parent="." instance=ExtResource("1_capsule")]
+position = Vector3(0, 0.1, 0)
+camera_output_provider_path = NodePath("../MMOCameraRig")
+
+[node name="MMOCameraRig" parent="." instance=ExtResource("2_camera")]
+target_path = NodePath("../NeutralCharacterCapsule")
+initial_yaw_degrees = 35.0
+initial_pitch_degrees = -18.0
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+position = Vector3(0, -0.1, 0)
+shape = SubResource("BoxShape3D_floor")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+position = Vector3(0, -0.1, 0)
+mesh = SubResource("BoxMesh_floor")
+surface_material_override/0 = SubResource("StandardMaterial3D_floor")
+
+[node name="NorthBoundary" type="StaticBody3D" parent="."]
+position = Vector3(0, 0.6, -18)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NorthBoundary"]
+shape = SubResource("BoxShape3D_boundary_long")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NorthBoundary"]
+mesh = SubResource("BoxMesh_boundary_long")
+surface_material_override/0 = SubResource("StandardMaterial3D_block")
+
+[node name="SouthBoundary" type="StaticBody3D" parent="."]
+position = Vector3(0, 0.6, 18)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SouthBoundary"]
+shape = SubResource("BoxShape3D_boundary_long")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SouthBoundary"]
+mesh = SubResource("BoxMesh_boundary_long")
+surface_material_override/0 = SubResource("StandardMaterial3D_block")
+
+[node name="WestBoundary" type="StaticBody3D" parent="."]
+position = Vector3(-18, 0.6, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WestBoundary"]
+shape = SubResource("BoxShape3D_boundary_short")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WestBoundary"]
+mesh = SubResource("BoxMesh_boundary_short")
+surface_material_override/0 = SubResource("StandardMaterial3D_block")
+
+[node name="EastBoundary" type="StaticBody3D" parent="."]
+position = Vector3(18, 0.6, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EastBoundary"]
+shape = SubResource("BoxShape3D_boundary_short")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="EastBoundary"]
+mesh = SubResource("BoxMesh_boundary_short")
+surface_material_override/0 = SubResource("StandardMaterial3D_block")
+
+[node name="CameraCollisionBlockA" type="StaticBody3D" parent="."]
+position = Vector3(4, 1.25, 5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraCollisionBlockA"]
+shape = SubResource("BoxShape3D_block")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraCollisionBlockA"]
+mesh = SubResource("BoxMesh_block")
+surface_material_override/0 = SubResource("StandardMaterial3D_block")
+
+[node name="CameraCollisionBlockB" type="StaticBody3D" parent="."]
+position = Vector3(-6, 1.25, -3)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CameraCollisionBlockB"]
+shape = SubResource("BoxShape3D_block")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CameraCollisionBlockB"]
+mesh = SubResource("BoxMesh_block")
+surface_material_override/0 = SubResource("StandardMaterial3D_block")
+
+[node name="TallCameraColumn" type="StaticBody3D" parent="."]
+position = Vector3(0, 2.5, 9)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TallCameraColumn"]
+shape = SubResource("BoxShape3D_block")
+scale = Vector3(0.8, 2, 0.8)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TallCameraColumn"]
+mesh = SubResource("BoxMesh_block")
+scale = Vector3(0.8, 2, 0.8)
+surface_material_override/0 = SubResource("StandardMaterial3D_block")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.813798, -0.296198, 0.5, 0, 0.866025, 0.5, -0.581148, -0.406899, 0.704416, 0, 8, 0)
+light_energy = 2.2
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+position = Vector3(-4, 5, 3)
+light_energy = 0.8
+omni_range = 12.0

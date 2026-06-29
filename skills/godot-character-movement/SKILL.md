@@ -46,6 +46,7 @@ For later implementation slices, also inspect existing files under:
 - `game/systems/camera/`
 - `game/scenes/test/CharacterMovementCapsuleTest.tscn`
 - `game/scenes/test/PlayableCameraMovementTest.tscn`
+- `game/scenes/test/GeneratedNeutralPlayground.tscn`
 - `tools/godot/run_character_movement_capsule_validation.py`
 - `tools/godot/validate_character_movement_capsule_slice.gd`
 - `tools/godot/run_character_movement_camera_relative_validation.py`
@@ -54,6 +55,8 @@ For later implementation slices, also inspect existing files under:
 - `tools/godot/validate_character_movement_facing_slice.gd`
 - `tools/godot/run_playable_camera_movement_validation.py`
 - `tools/godot/validate_playable_camera_movement_scene.gd`
+- `tools/godot/run_generated_neutral_playground_validation.py`
+- `tools/godot/validate_generated_neutral_playground_scene.gd`
 
 ## workflow
 
@@ -100,6 +103,12 @@ Current playable scene validation:
 
 ```powershell
 python tools/godot/run_playable_camera_movement_validation.py
+```
+
+Current generated playground validation:
+
+```powershell
+python tools/godot/run_generated_neutral_playground_validation.py
 ```
 
 Expected result:

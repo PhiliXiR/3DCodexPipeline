@@ -28,12 +28,14 @@ The current implementation includes:
 - `NeutralCharacterCapsule.tscn` reusable neutral capsule scene.
 - `CharacterMovementCapsuleTest.tscn` neutral validation scene.
 - `PlayableCameraMovementTest.tscn` neutral playable camera + movement validation scene.
+- `GeneratedNeutralPlayground.tscn` generated neutral lit playground scene.
 - `validate_character_movement_capsule_slice.gd` headless Godot validation.
 - `validate_character_movement_camera_relative_slice.gd` headless Godot camera-relative movement validation.
 - `validate_character_movement_facing_slice.gd` headless Godot facing validation.
 - `validate_playable_camera_movement_scene.gd` headless Godot playable scene validation.
+- `validate_generated_neutral_playground_scene.gd` headless Godot playground validation.
 
-This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, external movement vector hook, camera-relative WASD movement, smooth MMO facing toward movement direction, and a playable neutral camera + movement validation scene. Generated playground scenes are intentionally handled by later issue slices.
+This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, external movement vector hook, camera-relative WASD movement, smooth MMO facing toward movement direction, a playable neutral camera + movement validation scene, and a generated neutral lit playground scene.
 
 ## Validation
 
@@ -61,15 +63,31 @@ Run the playable camera + movement scene validation:
 python tools/godot/run_playable_camera_movement_validation.py
 ```
 
+Run the generated playground validation:
+
+```powershell
+python tools/godot/run_generated_neutral_playground_validation.py
+```
+
 ## Manual Test Scene
 
 Open `res://scenes/test/PlayableCameraMovementTest.tscn` in Godot to manually test the current movement and camera stack.
+
+Open `res://scenes/test/GeneratedNeutralPlayground.tscn` for a larger neutral lit walk-around environment.
 
 Expected controls:
 
 - WASD movement through `move_forward`, `move_backward`, `move_left`, and `move_right`.
 - Right mouse button camera look from the MMO Camera System.
 - Mouse wheel camera zoom from the MMO Camera System.
+
+## Generated Playground Maintenance
+
+`GeneratedNeutralPlayground.tscn` is maintained as deterministic generated-style validation geometry made from primitive Godot meshes and colliders. Keep it neutral:
+
+- Use simple floors, boundaries, blocks, columns, lights, and spawn markers.
+- Avoid architecture, props, materials, names, or layout choices that imply a final game theme.
+- Preserve collision on walkable surfaces, boundaries, and camera test obstacles.
 
 ## Input Actions
 
