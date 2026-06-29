@@ -38,6 +38,10 @@ The MMO Controls Feel layer must not:
 
 ## Components
 
+### Current Implementation Slice
+
+The first implementation slice provides `MMOControlsMouseState`, a reusable resource that tracks LMB, RMB, and both-buttons state and exposes derived camera orbit, character-facing, and mouse-forward intent.
+
 ### Controls Feel Settings Resource
 
 Defines tunable and configurable controls behavior.

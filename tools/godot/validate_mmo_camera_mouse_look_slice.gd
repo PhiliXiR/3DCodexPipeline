@@ -75,6 +75,38 @@ func _run_validation() -> void:
 	if camera_rig.call("is_mouse_look_active") as bool:
 		failures.append("Right mouse release did not disable mouse look")
 
+	var left_press := InputEventMouseButton.new()
+	left_press.button_index = MOUSE_BUTTON_LEFT
+	left_press.pressed = true
+	camera_rig.call("_unhandled_input", left_press)
+
+	if not camera_rig.call("is_mouse_look_active") as bool:
+		failures.append("Left mouse press did not enable camera orbit look")
+	if not camera_rig.call("is_left_mouse_look_active") as bool:
+		failures.append("Left mouse press did not expose left-only look state")
+	if camera_rig.call("should_face_camera_direction") as bool:
+		failures.append("Left-only look incorrectly exposed character-facing intent")
+
+	var both_press := InputEventMouseButton.new()
+	both_press.button_index = MOUSE_BUTTON_RIGHT
+	both_press.pressed = true
+	camera_rig.call("_unhandled_input", both_press)
+
+	if not camera_rig.call("is_both_mouse_move_active") as bool:
+		failures.append("Both mouse buttons did not expose forward movement intent")
+	if not camera_rig.call("should_face_camera_direction") as bool:
+		failures.append("Both mouse buttons did not expose camera-facing intent")
+
+	var both_right_release := InputEventMouseButton.new()
+	both_right_release.button_index = MOUSE_BUTTON_RIGHT
+	both_right_release.pressed = false
+	camera_rig.call("_unhandled_input", both_right_release)
+
+	var left_release := InputEventMouseButton.new()
+	left_release.button_index = MOUSE_BUTTON_LEFT
+	left_release.pressed = false
+	camera_rig.call("_unhandled_input", left_release)
+
 	scene.queue_free()
 	_finish(failures)
 

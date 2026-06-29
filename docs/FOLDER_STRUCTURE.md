@@ -96,6 +96,8 @@ Systems should be added only when approved and should remain data-driven and gen
 Current approved system areas:
 
 - `game/systems/camera/`: reusable MMO-style third-person camera foundation.
+- `game/systems/character/`: reusable neutral third-person character movement foundation.
+- `game/systems/controls/`: reusable MMO-style controls feel coordination.
 
 ### `game/data/`
 
@@ -135,6 +137,8 @@ Current scripts:
 Godot command-line helper scripts and project automation.
 
 Examples may eventually include import refresh commands, export checks, project metadata inspection, or headless validation.
+
+Current scripts include Godot headless validators for the camera, character movement, generated playground, and controls-feel slices.
 
 ### `tools/editor/`
 

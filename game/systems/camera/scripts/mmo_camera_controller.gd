@@ -4,6 +4,7 @@ extends Node3D
 signal camera_mode_changed(camera_mode: int)
 
 const MMOCameraExtensionHooksScript := preload("res://systems/camera/scripts/mmo_camera_extension_hooks.gd")
+const MMOControlsMouseStateScript := preload("res://systems/controls/scripts/mmo_controls_mouse_state.gd")
 
 @export var target_path: NodePath
 @export var camera_path: NodePath = ^"Camera3D"
@@ -27,6 +28,7 @@ var _is_initialized: bool = false
 var _is_mouse_look_active: bool = false
 var _mode_output: MMOCameraModeOutput = MMOCameraModeOutput.new()
 var _extension_hooks: Resource = MMOCameraExtensionHooksScript.new()
+var _controls_mouse_state: Resource = MMOControlsMouseStateScript.new()
 
 
 func _ready() -> void:
@@ -133,6 +135,34 @@ func is_mouse_look_active() -> bool:
 	return _is_mouse_look_active
 
 
+func get_controls_mouse_state() -> Resource:
+	return _controls_mouse_state
+
+
+func get_mouse_button_state() -> int:
+	return _controls_mouse_state.get_mouse_button_state()
+
+
+func is_left_mouse_look_active() -> bool:
+	return _controls_mouse_state.is_left_mouse_look_active()
+
+
+func is_right_mouse_look_active() -> bool:
+	return _controls_mouse_state.is_right_mouse_look_active()
+
+
+func is_both_mouse_move_active() -> bool:
+	return _controls_mouse_state.should_move_forward_from_mouse()
+
+
+func should_face_camera_direction() -> bool:
+	return _controls_mouse_state.should_face_camera_direction()
+
+
+func should_move_forward_from_mouse() -> bool:
+	return _controls_mouse_state.should_move_forward_from_mouse()
+
+
 func get_mode_output() -> MMOCameraModeOutput:
 	_update_mode_output()
 	return _mode_output
@@ -190,8 +220,8 @@ func _handle_mouse_button(event: InputEventMouseButton) -> void:
 		zoom_by_steps(-1.0)
 		return
 
-	if event.button_index == MOUSE_BUTTON_RIGHT:
-		_is_mouse_look_active = event.pressed
+	if _controls_mouse_state.handle_input_event(event):
+		_is_mouse_look_active = _controls_mouse_state.should_orbit_camera()
 
 
 func _handle_mouse_motion(event: InputEventMouseMotion) -> void:
