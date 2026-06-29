@@ -17,6 +17,12 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="AI First Game Foundation"
 config/features=PackedStringArray("4.6")
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
+
 [input]
 
 move_forward={
