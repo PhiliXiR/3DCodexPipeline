@@ -116,7 +116,7 @@ func update_camera(delta: float) -> void:
 
 	var rotation_weight := _get_smoothing_weight(settings.rotation_smoothing, delta)
 	var distance_weight := _get_smoothing_weight(settings.collision_recovery_smoothing, delta)
-	_current_yaw_degrees = lerpf(_current_yaw_degrees, _desired_yaw_degrees, rotation_weight)
+	_current_yaw_degrees = _lerp_angle_degrees(_current_yaw_degrees, _desired_yaw_degrees, rotation_weight)
 	_current_pitch_degrees = lerpf(_current_pitch_degrees, _desired_pitch_degrees, rotation_weight)
 	_actual_distance = lerpf(_actual_distance, _preferred_distance, distance_weight)
 	_apply_transform(delta, false)
@@ -124,6 +124,10 @@ func update_camera(delta: float) -> void:
 
 func get_yaw_degrees() -> float:
 	return _desired_yaw_degrees
+
+
+func get_current_yaw_degrees() -> float:
+	return _current_yaw_degrees
 
 
 func get_pitch_degrees() -> float:
@@ -330,3 +334,7 @@ func _get_smoothing_weight(smoothing: float, delta: float) -> float:
 	if smoothing <= 0.0:
 		return 1.0
 	return 1.0 - exp(-smoothing * delta)
+
+
+func _lerp_angle_degrees(from_degrees: float, to_degrees: float, weight: float) -> float:
+	return rad_to_deg(lerp_angle(deg_to_rad(from_degrees), deg_to_rad(to_degrees), weight))

@@ -63,6 +63,17 @@ func _run_validation() -> void:
 	if is_equal_approx(previous_yaw, updated_yaw):
 		failures.append("Orbit call did not update yaw")
 
+	var yaw_before_boundary_setup: float = camera_rig.call("get_yaw_degrees") as float
+	camera_rig.call("orbit", 179.0 - yaw_before_boundary_setup, 0.0)
+	camera_rig.call("force_update")
+	var boundary_yaw_before: float = camera_rig.call("get_current_yaw_degrees") as float
+	camera_rig.call("orbit", 5.0, 0.0)
+	camera_rig.call("update_camera", 0.016)
+	var boundary_yaw_after: float = camera_rig.call("get_current_yaw_degrees") as float
+	var boundary_step_degrees := absf(rad_to_deg(angle_difference(deg_to_rad(boundary_yaw_before), deg_to_rad(boundary_yaw_after))))
+	if boundary_step_degrees > 20.0:
+		failures.append("Camera yaw smoothing jumped across the wrap boundary")
+
 	scene.queue_free()
 	_finish(failures)
 
