@@ -283,7 +283,8 @@ func _update_mode_output() -> void:
 		get_camera_forward(),
 		get_camera_planar_forward(),
 		get_camera_planar_right(),
-		_is_mouse_look_active
+		_is_mouse_look_active,
+		_controls_mouse_state.should_face_camera_direction()
 	)
 
 

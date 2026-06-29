@@ -6,6 +6,8 @@ class FakeCameraOutput:
 	var camera_mode: int = 0
 	var camera_planar_forward: Vector3 = Vector3.FORWARD
 	var camera_planar_right: Vector3 = Vector3.RIGHT
+	var should_face_camera: bool = false
+	var desired_character_facing_direction: Vector3 = Vector3.ZERO
 
 
 class FakeCameraOutputProvider:
@@ -61,6 +63,22 @@ func _run_validation() -> void:
 	if later_alignment <= first_step_alignment:
 		failures.append("Capsule did not continue turning toward movement direction")
 
+	Input.action_release(&"move_right")
+	capsule.rotation.y = deg_to_rad(-90.0)
+	provider.output.should_face_camera = true
+	provider.output.desired_character_facing_direction = Vector3.FORWARD
+	Input.action_press(&"move_right")
+	capsule.call("update_movement", 0.016)
+	var camera_facing_alignment := _facing_direction(capsule).dot(Vector3.FORWARD)
+	if camera_facing_alignment <= 0.0:
+		failures.append("RMB camera-facing intent did not rotate toward camera planar forward")
+	var desired_movement: Vector3 = capsule.call("get_desired_movement_direction") as Vector3
+	if not desired_movement.is_equal_approx(Vector3.RIGHT):
+		failures.append("RMB camera-facing intent changed movement direction ownership")
+
+	Input.action_release(&"move_right")
+	provider.output.should_face_camera = false
+	provider.output.desired_character_facing_direction = Vector3.ZERO
 	provider.output.camera_mode = 1
 	var yaw_before_action_mode := capsule.rotation.y
 	capsule.call("update_movement", 0.016)

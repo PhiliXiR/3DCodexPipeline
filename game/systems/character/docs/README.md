@@ -38,9 +38,9 @@ The current implementation includes:
 - `validate_playable_camera_movement_scene.gd` headless Godot playable scene validation.
 - `validate_generated_neutral_playground_scene.gd` headless Godot playground validation.
 
-This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, external movement vector hook, camera-relative WASD movement, smooth MMO facing toward movement direction, a playable neutral camera + movement validation scene, and a generated neutral lit playground scene.
+This slice proves the neutral capsule/proxy scene, settings resource, controller shell, collision shape, visible proxy, external movement vector hook, camera-relative WASD movement, smooth MMO facing toward movement direction, RMB camera-facing intent consumption, a playable neutral camera + movement validation scene, and a generated neutral lit playground scene.
 
-The recommended foundation A/D default is `STRAFE`, preserving the current camera-relative capsule behavior. `TURN` is available for MMO-style keyboard turning: A/D rotate the neutral proxy in place and do not produce lateral velocity. Forward/backward movement remains camera-relative until a later controls-feel slice connects RMB-facing movement.
+The recommended foundation A/D default is `STRAFE`, preserving the current camera-relative capsule behavior. `TURN` is available for MMO-style keyboard turning: A/D rotate the neutral proxy in place and do not produce lateral velocity. RMB-held movement may align character facing toward camera planar forward while movement velocity remains controlled by movement input.
 
 ## Validation
 
@@ -93,6 +93,13 @@ Expected controls:
 - Mouse wheel camera zoom from the MMO Camera System.
 
 The MMO Controls Feel Layer is the planned integration point for mouse-button look state, cursor capture, both-buttons movement, and configurable A/D behavior. Movement should consume its read-only movement and facing intent; it should not own camera orbit or cursor policy.
+
+Current RMB behavior:
+
+- Holding RMB keeps camera orbit inside the MMO Camera System.
+- Camera mode output exposes camera-facing intent to movement.
+- Movement may face the neutral proxy toward camera planar forward when movement input exists.
+- LMB-only orbit does not request character-facing intent.
 
 ## Generated Playground Maintenance
 

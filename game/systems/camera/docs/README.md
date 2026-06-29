@@ -31,7 +31,7 @@ The current camera rig applies the controls cursor policy while mouse-look is ac
 
 Mode semantics:
 
-- MMO mode: future character systems rotate toward movement direction while the camera orbits independently.
+- MMO mode: character systems rotate toward movement direction while the camera orbits independently. RMB-held mouse look may expose camera-facing intent through mode output.
 - Action mode: future character systems may rotate toward camera planar forward.
 
 Current public direction helpers:
@@ -40,6 +40,7 @@ Current public direction helpers:
 - `get_camera_planar_forward()`
 - `get_camera_planar_right()`
 - `is_mouse_look_active()`
+- `should_face_camera_direction()`
 
 ## Current Slice
 
@@ -57,7 +58,7 @@ The current implementation includes:
 - `validate_mmo_camera_mode_output_slice.gd` headless Godot mode output validation.
 - `validate_mmo_camera_extension_hooks_slice.gd` headless Godot extension hook validation.
 
-This slice proves target following, code-driven orbit, right-mouse mouse-look, smooth mouse-wheel zoom, camera collision, camera mode output, and passive future extension hooks against a generic target proxy.
+This slice proves target following, code-driven orbit, right-mouse mouse-look, smooth mouse-wheel zoom, camera collision, camera mode output, RMB camera-facing intent, and passive future extension hooks against a generic target proxy.
 
 ## Validation
 

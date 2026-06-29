@@ -178,13 +178,39 @@ func _get_optional_node(path: NodePath) -> Node:
 
 
 func _apply_facing(delta: float) -> void:
-	if _desired_movement_direction.length_squared() <= 0.0001:
+	var facing_direction := _get_requested_facing_direction()
+	if facing_direction.length_squared() <= 0.0001:
 		return
 
-	var target_yaw := atan2(-_desired_movement_direction.x, -_desired_movement_direction.z)
+	var target_yaw := atan2(-facing_direction.x, -facing_direction.z)
 	var turn_speed: float = settings.get("turn_speed") as float
 	var weight := _get_smoothing_weight(turn_speed, delta)
 	rotation.y = rotation.y + angle_difference(rotation.y, target_yaw) * weight
+
+
+func _get_requested_facing_direction() -> Vector3:
+	if _desired_movement_direction.length_squared() <= 0.0001:
+		return Vector3.ZERO
+
+	var camera_facing_direction := _get_camera_requested_facing_direction()
+	if camera_facing_direction.length_squared() > 0.0001:
+		return camera_facing_direction
+
+	return _desired_movement_direction
+
+
+func _get_camera_requested_facing_direction() -> Vector3:
+	var output := _get_camera_mode_output()
+	if output == null:
+		return Vector3.ZERO
+
+	var should_face_camera_variant: Variant = output.get("should_face_camera")
+	if not should_face_camera_variant is bool or not should_face_camera_variant:
+		return Vector3.ZERO
+
+	var facing_direction: Vector3 = output.get("desired_character_facing_direction") as Vector3
+	facing_direction.y = 0.0
+	return facing_direction.normalized() if facing_direction.length_squared() > 0.0001 else Vector3.ZERO
 
 
 func _apply_keyboard_turn_input(delta: float) -> void:

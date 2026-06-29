@@ -44,6 +44,7 @@ The first implementation slices provide:
 
 - `MMOControlsMouseState`, a reusable resource that tracks LMB, RMB, and both-buttons state and exposes derived camera orbit, character-facing, and mouse-forward intent.
 - `MMOControlsCursorPolicy`, a reusable resource that captures the cursor while mouse-look is active and restores the previous mouse mode when mouse-look ends.
+- `MMOCameraModeOutput` integration that exposes RMB-held camera-facing intent to movement without moving or rotating the character.
 
 ### Controls Feel Settings Resource
 
@@ -120,7 +121,7 @@ The camera may rotate around the target while the character's facing and movemen
 
 RMB-only behavior is camera orbit plus character-facing intent.
 
-The camera may rotate around the target. The controls-feel state should tell movement that camera-facing movement is desired while RMB is held. The movement system remains responsible for applying turn speed and final character rotation.
+The camera may rotate around the target. The controls-feel state tells movement that camera-facing movement is desired while RMB is held by setting read-only camera mode output. The movement system remains responsible for applying turn speed and final character rotation.
 
 ### Both Mouse Buttons
 
@@ -140,7 +141,7 @@ Expected default:
 
 The current recommended foundation default is strafe, because the existing capsule movement slice already uses camera-relative strafe behavior and it is easier to validate without animation. Turn mode should be supported as a first-class option before final game tuning.
 
-Turn mode currently means A/D rotate the neutral character proxy without adding lateral movement. Forward/backward movement remains camera-relative until a later approved slice connects RMB-facing movement and fuller MMO locomotion feel.
+Turn mode currently means A/D rotate the neutral character proxy without adding lateral movement. Forward/backward movement remains camera-relative. When RMB is held and movement input exists, character facing may align toward camera planar forward while velocity remains owned by movement input.
 
 ## Integration Boundaries
 
