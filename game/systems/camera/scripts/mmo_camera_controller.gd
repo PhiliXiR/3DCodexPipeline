@@ -249,7 +249,7 @@ func _handle_mouse_button(event: InputEventMouseButton) -> void:
 
 func _handle_mouse_motion(event: InputEventMouseMotion) -> void:
 	var yaw_delta := -event.relative.x * settings.rotation_sensitivity
-	var pitch_delta := -event.relative.y * settings.rotation_sensitivity
+	var pitch_delta := event.relative.y * settings.rotation_sensitivity
 	orbit(yaw_delta, pitch_delta)
 
 

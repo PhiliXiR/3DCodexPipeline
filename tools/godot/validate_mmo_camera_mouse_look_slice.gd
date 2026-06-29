@@ -56,8 +56,11 @@ func _run_validation() -> void:
 
 	if is_equal_approx(initial_yaw, camera_rig.call("get_yaw_degrees") as float):
 		failures.append("Mouse-look motion did not update yaw")
-	if is_equal_approx(initial_pitch, camera_rig.call("get_pitch_degrees") as float):
+	var pitch_after_mouse_up: float = camera_rig.call("get_pitch_degrees") as float
+	if is_equal_approx(initial_pitch, pitch_after_mouse_up):
 		failures.append("Mouse-look motion did not update pitch")
+	if pitch_after_mouse_up >= initial_pitch:
+		failures.append("Mouse-up look should lower pitch with the current vertical camera feel")
 
 	var settings: Resource = camera_rig.get("settings") as Resource
 	var min_pitch: float = settings.get("min_pitch_degrees") as float
