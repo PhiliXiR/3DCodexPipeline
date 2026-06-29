@@ -82,6 +82,18 @@ A camera component that exposes read-only camera mode and direction data to futu
 
 A reusable movement runtime system built around neutral `CharacterBody3D` movement, camera-relative WASD input, gravity, floor collision, and configurable facing behavior.
 
+### MMO Controls Feel Layer
+
+A reusable coordination layer that translates raw mouse-button and movement input state into read-only camera and movement intent. It owns MMO-style input semantics such as LMB orbit, RMB look, both-buttons forward movement, cursor capture, and configurable A/D behavior without implementing camera placement or character physics.
+
+### Mouse Button State Model
+
+The explicit state machine for left mouse, right mouse, and combined mouse-button input. It prevents camera and movement systems from independently guessing what LMB-only, RMB-only, or both-buttons-held should mean.
+
+### Cursor Policy
+
+The rules for when the mouse cursor is visible, captured, hidden, or restored during camera-look interactions. Cursor policy belongs to the controls feel layer so camera and movement systems do not duplicate mouse-mode decisions.
+
 ### Neutral Character Proxy
 
 A simple capsule or generic visual marker used to validate movement before final character assets, rigs, and animations are introduced.

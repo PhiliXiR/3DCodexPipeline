@@ -7,7 +7,9 @@ The movement system is implemented in slices and must remain reusable infrastruc
 Primary references:
 
 - `docs/runtime_systems/character_movement_system_contract.md`
+- `docs/runtime_systems/mmo_controls_feel_contract.md`
 - `docs/adr/0004-character-movement-system-architecture.md`
+- `docs/adr/0005-mmo-controls-feel-layer.md`
 - `skills/godot-character-movement/SKILL.md`
 
 ## Planned Components
@@ -80,6 +82,8 @@ Expected controls:
 - WASD movement through `move_forward`, `move_backward`, `move_left`, and `move_right`.
 - Right mouse button camera look from the MMO Camera System.
 - Mouse wheel camera zoom from the MMO Camera System.
+
+The MMO Controls Feel Layer is the planned integration point for mouse-button look state, cursor capture, both-buttons movement, and configurable A/D behavior. Movement should consume its read-only movement and facing intent; it should not own camera orbit or cursor policy.
 
 ## Generated Playground Maintenance
 

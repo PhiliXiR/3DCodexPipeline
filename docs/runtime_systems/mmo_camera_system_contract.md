@@ -131,6 +131,7 @@ The camera should accept:
 
 - A focal target node.
 - A `CameraSettings` resource.
+- Controls-feel look intent from the MMO Controls Feel Layer.
 - Input events for mouse look and wheel zoom.
 - Physics world state for collision checks.
 
@@ -170,6 +171,18 @@ collision_state_changed(is_colliding)
 ```
 
 Signals should be integration hooks, not hidden control flow.
+
+## Controls Feel Integration
+
+The camera system should consume read-only look intent from the MMO Controls Feel Layer once that layer exists.
+
+Expected controls-feel semantics:
+
+- LMB-only: camera orbit is allowed without expressing character-facing intent.
+- RMB-only: camera orbit is allowed and the controls layer may express camera-facing intent to movement.
+- Both mouse buttons: camera orbit remains available while the controls layer may express forward movement intent.
+
+The camera remains responsible only for orbit, pitch, zoom, collision, smoothing, camera placement, and read-only camera output. It must not apply movement, rotate a character, capture final input bindings, or decide whether A/D means turn or strafe.
 
 ## Future Extension Seams
 

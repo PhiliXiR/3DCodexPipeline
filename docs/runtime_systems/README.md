@@ -21,3 +21,4 @@ Contracts are not implementations. They exist so future implementation work can 
 - [Settings System Contract](settings_system_contract.md)
 - [MMO Camera System Contract](mmo_camera_system_contract.md)
 - [Character Movement System Contract](character_movement_system_contract.md)
+- [MMO Controls Feel Contract](mmo_controls_feel_contract.md)

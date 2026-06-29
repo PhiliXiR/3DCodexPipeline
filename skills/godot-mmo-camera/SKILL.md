@@ -32,7 +32,9 @@ Before acting, read:
 - `docs/ARCHITECTURE.md`
 - `docs/CODING_STANDARDS.md`
 - `docs/runtime_systems/mmo_camera_system_contract.md`
+- `docs/runtime_systems/mmo_controls_feel_contract.md`
 - `docs/adr/0003-mmo-camera-system-architecture.md`
+- `docs/adr/0005-mmo-controls-feel-layer.md`
 - `game/systems/camera/docs/README.md`
 
 For later implementation slices, also inspect existing files under:
@@ -71,6 +73,7 @@ Current reusable pieces:
 Boundaries:
 
 - Camera code may expose direction, mode, distance, collision, and hook state.
+- Controls-feel code owns mouse-button state, cursor policy, and cross-system input intent.
 - Character systems own movement input, velocity, turning, animation, networking, and physics.
 - Future target lock, shake, and zone work must begin from the passive hooks and add behavior only in approved slices.
 - The system must stay theme-neutral and reusable across future 3D projects.

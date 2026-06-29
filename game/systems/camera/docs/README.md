@@ -7,7 +7,9 @@ The camera system is implemented in slices and must remain reusable infrastructu
 Primary references:
 
 - `docs/runtime_systems/mmo_camera_system_contract.md`
+- `docs/runtime_systems/mmo_controls_feel_contract.md`
 - `docs/adr/0003-mmo-camera-system-architecture.md`
+- `docs/adr/0005-mmo-controls-feel-layer.md`
 - `skills/godot-mmo-camera/SKILL.md`
 
 ## Planned Components
@@ -22,6 +24,8 @@ Primary references:
 ## Character Integration Boundary
 
 The camera exposes read-only direction and mode data for future character systems. It must not rotate a character, read movement input, choose animations, or own physics movement.
+
+The MMO Controls Feel Layer may decide when mouse-look, camera-facing intent, both-buttons movement, cursor capture, or A/D behavior are active. The camera consumes look intent and exposes camera output; it does not own movement semantics.
 
 Mode semantics:
 

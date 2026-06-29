@@ -11,6 +11,7 @@ Use ADRs when a decision affects project structure, dependency direction, data s
 - [0002: Use Settings As The First Runtime System Contract](0002-first-runtime-system-contract-settings.md)
 - [0003: MMO Camera System Architecture](0003-mmo-camera-system-architecture.md)
 - [0004: Character Movement System Architecture](0004-character-movement-system-architecture.md)
+- [0005: MMO Controls Feel Layer](0005-mmo-controls-feel-layer.md)
 
 ## When To Write An ADR
 

@@ -104,6 +104,7 @@ The movement system should accept:
 - A movement settings resource.
 - Godot input actions for movement intent.
 - A camera output provider, such as the MMO Camera System mode output.
+- Controls-feel movement and facing intent from the MMO Controls Feel Layer.
 - Godot physics state through `CharacterBody3D`.
 - Optional external desired movement vectors for future AI, replay, or network-driven controllers.
 
@@ -147,6 +148,18 @@ The movement system may read camera output, but it must not control camera orbit
 The movement system may expose movement and grounded state, but animation systems must decide animation blending and root motion in later slices.
 
 The movement system may be used by a playable validation scene, but game-specific levels and mechanics must remain outside this reusable system.
+
+## Controls Feel Integration
+
+The movement system should consume read-only movement and facing intent from the MMO Controls Feel Layer once that layer exists.
+
+Expected controls-feel semantics:
+
+- RMB-held movement may request that the character faces camera planar forward.
+- Both mouse buttons may request forward movement without requiring `move_forward` to be pressed.
+- A/D behavior should be configurable between strafe and turn semantics.
+
+The movement system remains responsible for translating approved movement intent into velocity, floor interaction, gravity, and character-facing rotation. It must not own camera orbit, cursor capture, mouse-look state transitions, or input rebinding persistence.
 
 ## Performance Expectations
 

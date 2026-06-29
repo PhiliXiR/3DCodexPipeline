@@ -32,7 +32,9 @@ Before acting, read:
 - `docs/CODING_STANDARDS.md`
 - `docs/runtime_systems/character_movement_system_contract.md`
 - `docs/runtime_systems/mmo_camera_system_contract.md`
+- `docs/runtime_systems/mmo_controls_feel_contract.md`
 - `docs/adr/0004-character-movement-system-architecture.md`
+- `docs/adr/0005-mmo-controls-feel-layer.md`
 - `game/systems/character/docs/README.md`
 - `game/systems/camera/docs/README.md`
 
