@@ -3,13 +3,15 @@ extends Node3D
 
 signal camera_mode_changed(camera_mode: int)
 
-const MMOCameraExtensionHooksScript := preload("res://systems/camera/scripts/mmo_camera_extension_hooks.gd")
-const MMOControlsCursorPolicyScript := preload("res://systems/controls/scripts/mmo_controls_cursor_policy.gd")
-const MMOControlsMouseStateScript := preload("res://systems/controls/scripts/mmo_controls_mouse_state.gd")
+const MMOCameraExtensionHooksScript := preload("mmo_camera_extension_hooks.gd")
+const MMOCameraModeOutputScript := preload("mmo_camera_mode_output.gd")
+const MMOCameraSettingsScript := preload("mmo_camera_settings.gd")
+const MMOControlsCursorPolicyScript := preload("../../controls/scripts/mmo_controls_cursor_policy.gd")
+const MMOControlsMouseStateScript := preload("../../controls/scripts/mmo_controls_mouse_state.gd")
 
 @export var target_path: NodePath
 @export var camera_path: NodePath = ^"Camera3D"
-@export var settings: MMOCameraSettings
+@export var settings: Resource
 @export var initial_yaw_degrees: float = 0.0
 @export var initial_pitch_degrees: float = -20.0
 @export_group("Extension Hooks")
@@ -27,7 +29,7 @@ var _preferred_distance: float = 0.0
 var _actual_distance: float = 0.0
 var _is_initialized: bool = false
 var _is_mouse_look_active: bool = false
-var _mode_output: MMOCameraModeOutput = MMOCameraModeOutput.new()
+var _mode_output: Resource = MMOCameraModeOutputScript.new()
 var _extension_hooks: Resource = MMOCameraExtensionHooksScript.new()
 var _controls_mouse_state: Resource = MMOControlsMouseStateScript.new()
 var _cursor_policy: Resource = MMOControlsCursorPolicyScript.new()
@@ -35,7 +37,7 @@ var _cursor_policy: Resource = MMOControlsCursorPolicyScript.new()
 
 func _ready() -> void:
 	if settings == null:
-		settings = MMOCameraSettings.new()
+		settings = MMOCameraSettingsScript.new()
 
 	_camera = get_node_or_null(camera_path) as Camera3D
 	_target = get_node_or_null(target_path) as Node3D
@@ -79,7 +81,7 @@ func set_preferred_distance(distance: float) -> void:
 
 func set_camera_mode(camera_mode: int) -> void:
 	if settings == null:
-		settings = MMOCameraSettings.new()
+		settings = MMOCameraSettingsScript.new()
 
 	if settings.camera_mode == camera_mode:
 		return
@@ -91,7 +93,7 @@ func set_camera_mode(camera_mode: int) -> void:
 
 func get_camera_mode() -> int:
 	if settings == null:
-		return MMOCameraSettings.CameraMode.MMO
+		return MMOCameraSettingsScript.CameraMode.MMO
 	return settings.camera_mode
 
 
@@ -186,7 +188,7 @@ func should_move_forward_from_mouse() -> bool:
 	return _controls_mouse_state.should_move_forward_from_mouse()
 
 
-func get_mode_output() -> MMOCameraModeOutput:
+func get_mode_output() -> Resource:
 	_update_mode_output()
 	return _mode_output
 
@@ -248,8 +250,8 @@ func _handle_mouse_button(event: InputEventMouseButton) -> void:
 
 
 func _handle_mouse_motion(event: InputEventMouseMotion) -> void:
-	var yaw_delta := -event.relative.x * settings.rotation_sensitivity
-	var pitch_delta := event.relative.y * settings.rotation_sensitivity
+	var yaw_delta: float = -event.relative.x * (settings.get("rotation_sensitivity") as float)
+	var pitch_delta: float = event.relative.y * (settings.get("rotation_sensitivity") as float)
 	orbit(yaw_delta, pitch_delta)
 
 
@@ -263,7 +265,7 @@ func zoom_by_steps(steps: float) -> void:
 
 
 func _apply_transform(delta: float, snap_to_target: bool) -> void:
-	var target_position := _target.global_position + Vector3.UP * settings.target_height
+	var target_position: Vector3 = _target.global_position + Vector3.UP * (settings.get("target_height") as float)
 	if snap_to_target:
 		global_position = target_position
 	else:
@@ -309,7 +311,7 @@ func _get_collision_limited_distance(target_position: Vector3, desired_offset: V
 		return desired_distance
 
 	var hit_position: Vector3 = hit["position"]
-	var limited_distance := target_position.distance_to(hit_position) - settings.collision_buffer
+	var limited_distance: float = target_position.distance_to(hit_position) - (settings.get("collision_buffer") as float)
 	return clampf(limited_distance, 0.05, desired_distance)
 
 

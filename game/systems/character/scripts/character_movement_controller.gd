@@ -5,7 +5,7 @@ signal movement_started
 signal movement_stopped
 signal grounded_state_changed(is_grounded: bool)
 
-const CharacterMovementSettingsScript := preload("res://systems/character/scripts/character_movement_settings.gd")
+const CharacterMovementSettingsScript := preload("character_movement_settings.gd")
 
 @export var settings: Resource
 @export var visual_root_path: NodePath

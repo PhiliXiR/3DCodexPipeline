@@ -2,6 +2,7 @@ extends SceneTree
 
 const SCENE_PATH := "res://scenes/test/MMOCameraOrbitTest.tscn"
 const CAMERA_RIG_PATH := "MMOCameraRig"
+const MMOCameraSettingsScript := preload("res://systems/camera/scripts/mmo_camera_settings.gd")
 
 
 func _initialize() -> void:
@@ -32,7 +33,7 @@ func _run_validation() -> void:
 	camera_rig.call("force_update")
 	var mmo_output: Resource = camera_rig.call("get_mode_output") as Resource
 	var default_mode: int = camera_rig.call("get_camera_mode") as int
-	if default_mode != MMOCameraSettings.CameraMode.MMO:
+	if default_mode != MMOCameraSettingsScript.CameraMode.MMO:
 		failures.append("Default camera mode was not MMO")
 	if mmo_output.get("should_face_camera") as bool:
 		failures.append("MMO mode incorrectly requested camera-facing character output")
@@ -44,7 +45,7 @@ func _run_validation() -> void:
 	right_mouse_press.pressed = true
 	camera_rig.call("_unhandled_input", right_mouse_press)
 	var rmb_output: Resource = camera_rig.call("get_mode_output") as Resource
-	if camera_rig.call("get_camera_mode") as int != MMOCameraSettings.CameraMode.MMO:
+	if camera_rig.call("get_camera_mode") as int != MMOCameraSettingsScript.CameraMode.MMO:
 		failures.append("RMB look changed the camera mode")
 	if not (rmb_output.get("should_face_camera") as bool):
 		failures.append("RMB look did not request camera-facing character output")
@@ -59,21 +60,21 @@ func _run_validation() -> void:
 	if post_rmb_output.get("should_face_camera") as bool:
 		failures.append("RMB release did not clear camera-facing character output")
 
-	camera_rig.call("set_camera_mode", MMOCameraSettings.CameraMode.ACTION)
+	camera_rig.call("set_camera_mode", MMOCameraSettingsScript.CameraMode.ACTION)
 	var action_output: Resource = camera_rig.call("get_mode_output") as Resource
 	var action_planar_forward: Vector3 = action_output.get("camera_planar_forward") as Vector3
 	var desired_facing: Vector3 = action_output.get("desired_character_facing_direction") as Vector3
 	var action_mode: int = camera_rig.call("get_camera_mode") as int
-	if action_mode != MMOCameraSettings.CameraMode.ACTION:
+	if action_mode != MMOCameraSettingsScript.CameraMode.ACTION:
 		failures.append("Action mode was not applied")
 	if not (action_output.get("should_face_camera") as bool):
 		failures.append("Action mode did not request camera-facing character output")
 	if not desired_facing.is_equal_approx(action_planar_forward):
 		failures.append("Action mode facing direction did not match camera planar forward")
-	if changed_modes != [MMOCameraSettings.CameraMode.ACTION]:
+	if changed_modes != [MMOCameraSettingsScript.CameraMode.ACTION]:
 		failures.append("Camera mode changed signal did not emit the expected mode")
 
-	camera_rig.call("set_camera_mode", MMOCameraSettings.CameraMode.MMO)
+	camera_rig.call("set_camera_mode", MMOCameraSettingsScript.CameraMode.MMO)
 	var restored_output: Resource = camera_rig.call("get_mode_output") as Resource
 	if restored_output.get("should_face_camera") as bool:
 		failures.append("Restored MMO mode still requested camera-facing character output")
