@@ -121,14 +121,15 @@ def _build_dock(args: argparse.Namespace) -> list[bpy.types.Object]:
     post_span = args.length * 0.82
     post_start = -post_span * 0.5
     post_spacing = post_span / (post_pairs - 1)
-    post_y = args.width * 0.58
+    post_width = 0.18
+    post_y = args.width * 0.5 + post_width * 0.5
     for pair in range(post_pairs):
         x = post_start + post_spacing * pair
         for side_index, y in enumerate((-post_y, post_y), start=1):
             obj = _cube(
                 f"{args.name}_post_{pair + 1:02d}_{side_index}",
                 (x, y, 0.2),
-                (0.18, 0.18, 1.35),
+                (post_width, post_width, 1.35),
                 post_wood,
             )
             _link_to_collection(obj, dock_collection)
