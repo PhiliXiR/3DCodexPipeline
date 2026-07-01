@@ -18,6 +18,7 @@ The Character Movement System is responsible for:
 - Supporting WASD movement input through configurable Godot input action names.
 - Translating movement input into camera-relative movement direction using the MMO Camera System output.
 - Applying gravity and floor collision through Godot physics.
+- Supporting a small grounded utility jump through configurable input and API intent.
 - Rotating the character proxy toward movement direction in MMO mode.
 - Exposing exported movement settings for speed, acceleration, deceleration, gravity, and turn behavior.
 - Remaining compatible with a neutral capsule/proxy before final character assets exist.
@@ -50,10 +51,12 @@ Expected settings include:
 - Deceleration.
 - Gravity.
 - Maximum fall speed.
+- Jump enabled.
+- Jump velocity.
 - Turn speed.
 - Keyboard turn speed.
 - Lateral input mode for A/D behavior.
-- Input action names for forward, backward, left, and right.
+- Input action names for forward, backward, left, right, and jump.
 - Movement mode or reserved mode integration settings.
 
 ### Character Movement Controller
@@ -124,11 +127,13 @@ set_camera_output_provider(provider)
 set_movement_enabled(enabled)
 set_external_movement_vector(vector)
 clear_external_movement_vector()
+request_jump()
 get_desired_movement_direction()
 get_current_velocity()
 get_last_nonzero_movement_direction()
 is_moving()
 is_grounded()
+is_jump_enabled()
 ```
 
 The exact names may evolve during implementation, but the public surface should remain narrow and documented.
@@ -141,6 +146,7 @@ The system may emit typed signals equivalent to:
 movement_started()
 movement_stopped()
 grounded_state_changed(is_grounded)
+jump_started()
 movement_mode_changed(mode)
 ```
 
@@ -184,6 +190,7 @@ Validation should cover:
 - Input action mapping.
 - Camera-relative movement direction.
 - Gravity and floor collision.
+- Grounded utility jump through input and API request.
 - Smooth facing toward movement direction.
 - Camera and movement scene integration.
 - Generated playground scene loading and collision presence.

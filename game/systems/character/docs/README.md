@@ -48,7 +48,7 @@ The recommended foundation A/D default is `STRAFE`, preserving the current camer
 
 - `move_speed = 5.5` for readable capsule traversal in the generated playground.
 - `acceleration = 30.0` and `deceleration = 34.0` for responsive start/stop without instant snapping.
-- `gravity = 28.0` and `max_fall_speed = 60.0` for stable grounded movement.
+- `gravity = 28.0`, `max_fall_speed = 60.0`, and `jump_velocity = 6.0` for stable grounded movement with a small utility hop.
 - `turn_speed = 16.0` and `keyboard_turn_speed_degrees = 150.0` for smoother facing and keyboard turning.
 - `lateral_input_mode = STRAFE` as the current foundation default.
 
@@ -129,6 +129,7 @@ The default movement settings reference these Godot input actions:
 - `move_backward`
 - `move_left`
 - `move_right`
+- `jump`
 
 ## Boundaries
 

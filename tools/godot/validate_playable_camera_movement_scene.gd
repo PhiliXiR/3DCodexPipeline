@@ -42,6 +42,8 @@ func _run_validation() -> void:
 		failures.append("Playable scene did not use the default character movement feel preset")
 	if not is_equal_approx(movement_settings.get("turn_speed") as float, 16.0):
 		failures.append("Playable scene did not use the tuned movement turn speed")
+	if not is_equal_approx(movement_settings.get("jump_velocity") as float, 6.0):
+		failures.append("Playable scene did not use the tuned utility jump velocity")
 
 	Input.action_press(&"move_forward")
 	capsule.call("update_movement", 0.016)
@@ -62,12 +64,21 @@ func _run_validation() -> void:
 		failures.append("Playable validation scene is missing a camera collision obstacle")
 
 	Input.action_release(&"move_forward")
+	_settle_capsule_on_floor(capsule)
+	Input.action_press(&"jump")
+	capsule.call("update_movement", 0.016)
+	Input.action_release(&"jump")
+	var jump_velocity: Vector3 = capsule.call("get_current_velocity") as Vector3
+	if jump_velocity.y <= 0.0:
+		failures.append("Capsule did not jump from configured jump input")
+
 	scene.queue_free()
 	_finish(failures)
 
 
 func _finish(failures: Array[String]) -> void:
 	Input.action_release(&"move_forward")
+	Input.action_release(&"jump")
 	if failures.is_empty():
 		print("Playable camera movement scene validation passed.")
 		quit(0)
@@ -76,3 +87,10 @@ func _finish(failures: Array[String]) -> void:
 	for failure in failures:
 		push_error(failure)
 	quit(1)
+
+
+func _settle_capsule_on_floor(capsule: CharacterBody3D) -> void:
+	for frame in 12:
+		capsule.call("update_movement", 0.016)
+		if capsule.call("is_grounded") as bool:
+			return

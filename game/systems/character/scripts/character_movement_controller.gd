@@ -4,6 +4,7 @@ extends CharacterBody3D
 signal movement_started
 signal movement_stopped
 signal grounded_state_changed(is_grounded: bool)
+signal jump_started
 
 const CharacterMovementSettingsScript := preload("character_movement_settings.gd")
 
@@ -20,6 +21,8 @@ var _turn_input_axis: float = 0.0
 var _camera_output_provider: Node
 var _was_moving: bool = false
 var _was_grounded: bool = false
+var _jump_requested: bool = false
+var _jump_input_was_pressed: bool = false
 
 
 func _ready() -> void:
@@ -49,6 +52,10 @@ func clear_external_movement_vector() -> void:
 	_has_external_movement_vector = false
 
 
+func request_jump() -> void:
+	_jump_requested = true
+
+
 func set_camera_output_provider(provider: Node) -> void:
 	_camera_output_provider = provider
 
@@ -61,6 +68,7 @@ func update_movement(delta: float) -> void:
 	_apply_keyboard_turn_input(delta)
 	_apply_facing(delta)
 	_apply_horizontal_velocity(delta)
+	_apply_jump()
 	_apply_gravity(delta)
 	move_and_slide()
 	_update_state_signals()
@@ -88,6 +96,10 @@ func is_moving() -> bool:
 
 func is_grounded() -> bool:
 	return is_on_floor()
+
+
+func is_jump_enabled() -> bool:
+	return settings != null and settings.get("jump_enabled") as bool
 
 
 func _get_requested_movement_direction() -> Vector3:
@@ -137,6 +149,12 @@ func _get_action_strength(action_name: StringName) -> float:
 	if not InputMap.has_action(action_name):
 		return 0.0
 	return Input.get_action_strength(action_name)
+
+
+func _is_action_pressed(action_name: StringName) -> bool:
+	if not InputMap.has_action(action_name):
+		return false
+	return Input.is_action_pressed(action_name)
 
 
 func _get_camera_planar_forward() -> Vector3:
@@ -235,6 +253,23 @@ func _apply_horizontal_velocity(delta: float) -> void:
 	var smoothed_velocity := horizontal_velocity.lerp(target_velocity, weight)
 	velocity.x = smoothed_velocity.x
 	velocity.z = smoothed_velocity.z
+
+
+func _apply_jump() -> void:
+	var jump_pressed := _is_action_pressed(settings.get("jump_action") as StringName)
+	if jump_pressed and not _jump_input_was_pressed:
+		_jump_requested = true
+	_jump_input_was_pressed = jump_pressed
+
+	if not _jump_requested:
+		return
+
+	_jump_requested = false
+	if not is_jump_enabled() or not _movement_enabled or not is_on_floor():
+		return
+
+	velocity.y = settings.get("jump_velocity") as float
+	jump_started.emit()
 
 
 func _apply_gravity(delta: float) -> void:
