@@ -78,6 +78,11 @@ Generated content and one-off scaffolding are copied into the game and become
 game-owned. The pipeline owns the tool that generated the output, not the
 game-specific result.
 
+The pipeline may use Git LFS for small reusable binary fixtures, templates, and
+intentionally shared source assets. It should not become a warehouse for large
+game-specific asset packs. Games own selected generated output and curated
+game-ready assets.
+
 ## Promotion Rule
 
 A candidate system should be promoted only when:
