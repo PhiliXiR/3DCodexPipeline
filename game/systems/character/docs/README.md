@@ -42,6 +42,18 @@ This slice proves the neutral capsule/proxy scene, settings resource, controller
 
 The recommended foundation A/D default is `STRAFE`, preserving the current camera-relative capsule behavior. `TURN` is available for MMO-style keyboard turning: A/D rotate the neutral proxy in place and do not produce lateral velocity. RMB-held movement may align character facing toward camera planar forward while movement velocity remains controlled by movement input.
 
+## Default Feel Preset
+
+`default_character_movement_settings.tres` is tuned as a neutral MMO-style playground preset:
+
+- `move_speed = 5.5` for readable capsule traversal in the generated playground.
+- `acceleration = 30.0` and `deceleration = 34.0` for responsive start/stop without instant snapping.
+- `gravity = 28.0` and `max_fall_speed = 60.0` for stable grounded movement.
+- `turn_speed = 16.0` and `keyboard_turn_speed_degrees = 150.0` for smoother facing and keyboard turning.
+- `lateral_input_mode = STRAFE` as the current foundation default.
+
+Future games should override this resource or provide their own preset rather than hard-coding feel changes in the controller.
+
 ## Validation
 
 Run the neutral capsule validation:

@@ -60,6 +60,18 @@ The current implementation includes:
 
 This slice proves target following, code-driven orbit, right-mouse mouse-look, smooth mouse-wheel zoom, camera collision, camera mode output, RMB camera-facing intent, and passive future extension hooks against a generic target proxy.
 
+## Default Feel Preset
+
+`default_mmo_camera_settings.tres` is tuned as a neutral MMO-style playground preset:
+
+- `default_distance = 7.0`, with `min_distance = 2.5` and `max_distance = 14.0`.
+- `rotation_sensitivity = 0.12` for steadier long-session mouse look.
+- `zoom_speed = 0.75` for smaller mouse-wheel distance steps.
+- `follow_smoothing = 14.0`, `rotation_smoothing = 22.0`, and `collision_recovery_smoothing = 20.0` for responsive but damped camera movement.
+- `collision_buffer = 0.35` to reduce near-surface clipping in the playground.
+
+Future games should override this resource or provide their own preset rather than hard-coding feel changes in the controller.
+
 ## Validation
 
 Run the neutral orbit validation:

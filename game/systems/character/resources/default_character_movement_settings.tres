@@ -4,3 +4,15 @@
 
 [resource]
 script = ExtResource("1_settings")
+move_speed = 5.5
+acceleration = 30.0
+deceleration = 34.0
+gravity = 28.0
+max_fall_speed = 60.0
+turn_speed = 16.0
+keyboard_turn_speed_degrees = 150.0
+lateral_input_mode = 0
+move_forward_action = &"move_forward"
+move_backward_action = &"move_backward"
+move_left_action = &"move_left"
+move_right_action = &"move_right"

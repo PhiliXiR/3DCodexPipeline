@@ -218,3 +218,12 @@ When implemented, the controls-feel layer should include:
 - Manual feel checklist.
 - Notes on known differences from polished commercial MMO controls.
 - Repo-local camera and movement skill updates.
+
+## Current Default Preset Notes
+
+The current foundation preset favors comfortable neutral playground testing over final game feel:
+
+- Camera defaults are slightly pulled back, slower on zoom, and smoothed for long-session orbit control.
+- Movement defaults favor responsive capsule start/stop and smooth facing without animation.
+- A/D defaults to strafe because it is predictable before animation, combat, and final input preferences exist.
+- Final games should override settings resources for their own feel pass.

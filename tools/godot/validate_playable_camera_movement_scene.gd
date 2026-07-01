@@ -31,6 +31,18 @@ func _run_validation() -> void:
 	if mode_output == null:
 		failures.append("Camera rig did not provide mode output")
 
+	var camera_settings: Resource = camera_rig.get("settings") as Resource
+	if not is_equal_approx(camera_settings.get("default_distance") as float, 7.0):
+		failures.append("Playable scene did not use the default MMO camera feel preset")
+	if not is_equal_approx(camera_settings.get("rotation_sensitivity") as float, 0.12):
+		failures.append("Playable scene did not use the tuned camera sensitivity")
+
+	var movement_settings: Resource = capsule.get("settings") as Resource
+	if not is_equal_approx(movement_settings.get("move_speed") as float, 5.5):
+		failures.append("Playable scene did not use the default character movement feel preset")
+	if not is_equal_approx(movement_settings.get("turn_speed") as float, 16.0):
+		failures.append("Playable scene did not use the tuned movement turn speed")
+
 	Input.action_press(&"move_forward")
 	capsule.call("update_movement", 0.016)
 	var desired_direction: Vector3 = capsule.call("get_desired_movement_direction") as Vector3
@@ -38,7 +50,7 @@ func _run_validation() -> void:
 		failures.append("Capsule did not receive camera-relative movement input")
 
 	camera_rig.call("force_update")
-	var camera_target_height: float = camera_rig.get("settings").get("target_height") as float
+	var camera_target_height: float = camera_settings.get("target_height") as float
 	var expected_target_position := capsule.global_position + Vector3.UP * camera_target_height
 	if camera_rig.global_position.distance_to(expected_target_position) > 0.05:
 		failures.append("Camera rig did not follow the capsule target")
